@@ -11,16 +11,15 @@ class User(AbstractUser):
   instagram = models.URLField(max_length=200, blank=True, null=True)
   twitter_x = models.URLField(max_length=200, blank=True, null=True)
   website = models.URLField(max_length=200, blank=True, null=True)
-  slug = models.SlugField(null=True, unique=True)
   likes = models.ManyToManyField(
     'users.User',
     related_name='liked_artists'
   )
 
-  def get_absolute_url(self):
-    return reverse('user_detail', kwargs={'slug': self.slug})
+  # def get_absolute_url(self):
+  #   return reverse('user_detail', kwargs={'slug': self.slug})
   
-  def save(self, *args, **kwargs):
-    if not self.slug:
-      self.slug = slugify(self.username)
-    return super().save(*args, **kwargs)
+  # def save(self, *args, **kwargs):
+  #   if not self.slug:
+  #     self.slug = slugify(self.username)
+  #   return super().save(*args, **kwargs)

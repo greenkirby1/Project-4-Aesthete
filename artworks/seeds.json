@@ -1,0 +1,43 @@
+[
+{
+  "model": "artworks.artwork",
+  "pk": 1,
+  "fields": {
+    "title": "Untitled",
+    "image": "",
+    "year_created": 2020,
+    "creator": 6,
+    "caption": "super amazing painting",
+    "added_on": "2024-05-28T16:35:19Z",
+    "likes": [
+      2
+    ]
+  }
+},
+{
+  "model": "artworks.artwork",
+  "pk": 2,
+  "fields": {
+    "title": "super duper amazing big fresh painting",
+    "image": "",
+    "year_created": 2022,
+    "creator": 5,
+    "caption": "it is an amazing painting just look at it",
+    "added_on": "2024-05-28T16:35:43Z",
+    "likes": []
+  }
+},
+{
+  "model": "artworks.artwork",
+  "pk": 3,
+  "fields": {
+    "title": "painting 1",
+    "image": "",
+    "year_created": 2020,
+    "creator": 2,
+    "caption": "big beautiful painting to soothe your soul, appreciate this painting I did",
+    "added_on": "2024-05-28T16:36:56Z",
+    "likes": []
+  }
+}
+]

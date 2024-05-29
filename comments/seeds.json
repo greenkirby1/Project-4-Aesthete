@@ -1,0 +1,32 @@
+[
+{
+  "model": "comments.comment",
+  "pk": 4,
+  "fields": {
+    "creator": 9,
+    "text": "wow this is a masterpiece!!",
+    "on_artwork": 3,
+    "created_on": "2024-05-29T10:55:41.663Z"
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 5,
+  "fields": {
+    "creator": 9,
+    "text": "ew ugly",
+    "on_artwork": 2,
+    "created_on": "2024-05-29T10:55:58.788Z"
+  }
+},
+{
+  "model": "comments.comment",
+  "pk": 6,
+  "fields": {
+    "creator": 9,
+    "text": "please stop",
+    "on_artwork": 2,
+    "created_on": "2024-05-29T10:57:10.041Z"
+  }
+}
+]

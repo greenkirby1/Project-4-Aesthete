@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-  is_artist = models.BooleanField(default=False)
+  is_artist = models.BooleanField(default=False, verbose_name='artist')
   slug = models.SlugField(null=True, unique=True)
   # likes = models.ManyToManyField(
   #   'users.User',

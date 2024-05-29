@@ -4,6 +4,7 @@ from django.utils import timezone
 # Create your models here.
 class Artwork(models.Model):
   title = models.CharField(max_length=200, default='Untitled')
+  image = models.URLField(max_length=200, default='')
   year_created = models.PositiveIntegerField(default=0)
   creator = models.ForeignKey(
     'users.User',

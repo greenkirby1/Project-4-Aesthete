@@ -1,9 +1,10 @@
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from .models import User
-from .serializers.common import RegisterSerializer, UserSerializer, ProfileSerializer
-from lib.permissions import IsCurrentUser
+from .serializers.common import RegisterSerializer, ProfileSerializer, UserSerializer
 from .serializers.populated import PopulatedUserSerializer
+from lib.permissions import IsCurrentUser
+from lib.views import UsernameDetailView, UpdateLikesView
 
 
 # Create your views here.
@@ -22,11 +23,13 @@ class ProfileView(RetrieveUpdateAPIView):
     return ProfileSerializer
   
 
-class UserDetailView(RetrieveAPIView):
+class UserDetailView(UsernameDetailView, RetrieveAPIView):
   lookup_field = 'slug'
   serializer_class = PopulatedUserSerializer
   permission_classes = [IsAuthenticated]
   
-  def get_queryset(self):
-    slug = self.kwargs['slug']
-    return User.objects.filter(username=slug)
+
+class UserLikesView(UsernameDetailView, UpdateLikesView):
+  lookup_field = 'slug'
+  serializer_class = UserSerializer
+  permission_classes = [IsAuthenticated]

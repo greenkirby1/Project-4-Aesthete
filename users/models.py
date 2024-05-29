@@ -12,10 +12,10 @@ class User(AbstractUser):
   twitter_x = models.URLField(max_length=200, blank=True, null=True)
   website = models.URLField(max_length=200, blank=True, null=True)
   slug = models.SlugField(null=True, unique=True)
-  # likes = models.ManyToManyField(
-  #   'users.User',
-  #   related_name='liked_artists',
-  # )
+  likes = models.ManyToManyField(
+    'users.User',
+    related_name='liked_artists'
+  )
 
   def get_absolute_url(self):
     return reverse('user_detail', kwargs={'slug': self.slug})

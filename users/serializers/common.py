@@ -33,6 +33,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     return User.objects.create_user(**validated_data)
   
 class UserSerializer(serializers.ModelSerializer):
+
   class Meta:
     model = User
     fields = (
@@ -46,6 +47,7 @@ class UserSerializer(serializers.ModelSerializer):
       'twitter_x',
       'website',
       'slug',
+      'likes',
       'created_collection',
     )
 
@@ -66,5 +68,6 @@ class ProfileSerializer(serializers.ModelSerializer):
       'instagram',
       'twitter_x',
       'website',
+      'likes',
       'created_collection',
     )

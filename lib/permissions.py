@@ -7,20 +7,20 @@ class IsCreatorOrReadOnly(BasePermission):
     if request.method in SAFE_METHODS:
       return True
     
-    return obj.creator == request.user or request.user.is_admin
+    return obj.creator == request.user or request.user.is_staff
   
 
 class IsCreator(BasePermission):
 
   def has_object_permission(self, request, view, obj):
     # print('this is user', request.user)
-    return obj.creator == request.user or request.user.is_admin
+    return obj.creator == request.user or request.user.is_staff
   
 
 class IsArtist(BasePermission):
   
   def has_permission(self, request, view):
-    return request.user.is_artist or request.user.is_admin
+    return request.user.is_artist or request.user.is_staff
       
 
 class IsArtistOrReadOnly(BasePermission):
@@ -29,4 +29,12 @@ class IsArtistOrReadOnly(BasePermission):
     if request.method in SAFE_METHODS:
       return True
     
-    return request.user.is_artist or request.user.is_admin
+    return request.user.is_artist or request.user.is_staff
+  
+
+class IsCurrentUser(BasePermission):
+
+  def has_object_permission(self, request, view, obj):
+    print('OBJ USERNAME ->', obj.username)
+    print('OBJ USERNAME ->', request.user.username)
+    return obj.username == request.user.username or request.user.is_staff

@@ -1,7 +1,8 @@
 from django.urls import path
+from .views import UserDetailView
 
 
 urlpatterns = [
-  # path('<slug:slug>/', UserDetailView.as_view()),
+  path('<str:slug>/', UserDetailView.as_view()),
   # path('<slug:slug>/like/', UserLikesView.as_view())
 ]

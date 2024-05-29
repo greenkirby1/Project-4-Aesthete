@@ -9,7 +9,14 @@ class RegisterSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = User
-    fields = ('id', 'email','username', 'password', 'password_confirmation', 'is_artist')
+    fields = (
+      'id', 
+      'email',
+      'username', 
+      'password', 
+      'password_confirmation', 
+      'is_artist',
+    )
 
   def validate(self, data):
     password = data.get('password')
@@ -28,9 +35,36 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id', 'username')
+    fields = (
+      'id', 
+      'username', 
+      'email', 
+      'is_artist',
+      'image', 
+      'facebook',
+      'instagram',
+      'twitter_x',
+      'website',
+      'slug',
+      'created_collection',
+    )
+
 
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ('id', 'first_name', 'last_name', 'email', 'username', 'password', 'is_artist')
+    fields = (
+      'id', 
+      'first_name', 
+      'last_name', 
+      'email', 
+      'username', 
+      'password', 
+      'is_artist',
+      'image', 
+      'facebook',
+      'instagram',
+      'twitter_x',
+      'website',
+      'created_collection',
+    )

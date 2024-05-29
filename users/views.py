@@ -10,10 +10,10 @@ class RegisterView(CreateAPIView):
   queryset = User.objects.all()
   serializer_class = RegisterSerializer
 
-# class ProfileView(RetrieveAPIView):
-#   queryset = User.objects.all()
-#   serializer_class = RegisterSerializer
-#   permission_classes = [IsCreator]
+class ProfileView(RetrieveAPIView):
+  queryset = User.objects.all()
+  serializer_class = RegisterSerializer
+  permission_classes = [IsCreator]
 
 # class UserDetailView(RetrieveUpdateAPIView):
 #   queryset = User.objects.all()

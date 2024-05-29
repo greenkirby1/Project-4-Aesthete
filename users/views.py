@@ -2,7 +2,7 @@ from rest_framework.generics import CreateAPIView, RetrieveAPIView, RetrieveUpda
 from rest_framework.permissions import IsAuthenticated
 from .models import User
 from .serializers.common import RegisterSerializer, ProfileSerializer, UserSerializer
-from .serializers.populated import PopulatedUserSerializer
+from .serializers.populated import PopulatedUserSerializer, PopulatedProfileSerializer
 from lib.permissions import IsCurrentUser
 from lib.views import UsernameDetailView, UpdateLikesView
 
@@ -19,7 +19,7 @@ class ProfileView(RetrieveUpdateAPIView):
 
   def get_serializer_class(self):
     if self.request.method == 'GET':
-      return PopulatedUserSerializer
+      return PopulatedProfileSerializer
     return ProfileSerializer
   
 

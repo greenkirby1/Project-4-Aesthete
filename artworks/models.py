@@ -14,10 +14,10 @@ class Artwork(models.Model):
     blank=True
   )
   caption = models.TextField(max_length=1000, blank=True, null=True)
-#  likes = models.ManyToManyField(
-#    'users.User',
-#    related_name='curated_collection'
-#  )
+  likes = models.ManyToManyField(
+    'users.User',
+    related_name='curated_collection'
+  )
   added_on = models.DateTimeField(default=timezone.now)
 
 

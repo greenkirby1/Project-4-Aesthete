@@ -49,7 +49,6 @@ class UserSerializer(serializers.ModelSerializer):
       'slug',
       'likes',
       'created_collection',
-      'liked_artists',
     )
 
 
@@ -71,5 +70,6 @@ class ProfileSerializer(serializers.ModelSerializer):
       'website',
       'likes',
       'created_collection',
-      'liked_artists'
+      'liked_artists',
+      'curated_collection',
     )

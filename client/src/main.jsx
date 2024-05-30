@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './Root.jsx'
 
+// Page Imports
+import Entrance from './pages/Entrance.jsx'
+import Register from './pages/Register.jsx'
+import Login from './pages/Login.jsx'
+import MyCollections from './pages/MyCollections.jsx'
+import ArtistCollection from './pages/ArtistCollection.jsx'
+import Gallery from './pages/Gallery.jsx'
+
+// Styles Imports
+import './styles/main.scss'
 
 // Router
 const router = createBrowserRouter([
@@ -15,11 +25,11 @@ const router = createBrowserRouter([
         element: <Entrance />
       },
       {
-        path: 'register',
+        path: 'join-us',
         element: <Register />
       },
       {
-        path: 'login',
+        path: 'welcome-back',
         element: <Login />
       },
       {
@@ -29,12 +39,10 @@ const router = createBrowserRouter([
       {
         path: 'gallery',
         element: <Gallery />,
-        children: [
-          {
-            path: '/:slug',
-            element: <ArtistCollection />
-          },
-        ]
+      },
+      {
+        path: 'gallery/:username',
+        element: <ArtistCollection />
       },
 
     ]

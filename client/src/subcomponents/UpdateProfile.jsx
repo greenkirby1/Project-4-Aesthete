@@ -1,10 +1,7 @@
-import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
-export default function Register() {
-
-  const naviate = useNavigate()
+export default function UpdateProfile() {
 
   const fields = {
     first_name: {
@@ -28,20 +25,35 @@ export default function Register() {
       type: 'password',
       placeholder: 'Create super secret password'
     },
-    passwordConfirmation: {
-      type: 'password',
-      placeholder: 'Repeat super secret password'
+    image: {
+      type: 'file',
+      placeholder: 'Show yourself'
+    },
+    facebook: 'url',
+    instagram: 'url',
+    twitter_x: 'url',
+    website: 'url'
+  }
+
+
+  async function handleProfileUpdate(formData) {
+    try {
+      await axios.put(`api/auth/profile/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`
+        }
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
 
-  async function handleRegister(formData) {
-    await axios.post('/api/auth/register', formData)
-    Navigate('/gallery')
+  function loadFields() {
+    return currentUserProfile
   }
 
   return (
     <>
-      <h1>Register here...</h1>
     </>
   )
 }

@@ -6,14 +6,15 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class User(AbstractUser):
   is_artist = models.BooleanField(default=False, verbose_name='artist')
-  image = models.URLField(max_length=200, default='')
+  image = models.URLField(max_length=200, blank=True, null=True)
   facebook = models.URLField(max_length=200, blank=True, null=True)
   instagram = models.URLField(max_length=200, blank=True, null=True)
   twitter_x = models.URLField(max_length=200, blank=True, null=True)
   website = models.URLField(max_length=200, blank=True, null=True)
   likes = models.ManyToManyField(
     'users.User',
-    related_name='liked_artists'
+    related_name='liked_artists',
+    blank=True
   )
 
   def save(self, *args, **kwargs):

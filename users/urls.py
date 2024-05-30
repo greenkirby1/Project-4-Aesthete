@@ -3,6 +3,6 @@ from .views import UserDetailView, UserLikesView
 
 
 urlpatterns = [
-  path('<str:slug>/', UserDetailView.as_view()),
-  path('<str:slug>/like/', UserLikesView.as_view())
+  path('<str:username>/', UserDetailView.as_view()),
+  path('<str:username>/like/', UserLikesView.as_view())
 ]

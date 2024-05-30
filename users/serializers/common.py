@@ -46,7 +46,6 @@ class UserSerializer(serializers.ModelSerializer):
       'instagram',
       'twitter_x',
       'website',
-      'slug',
       'likes',
       'created_collection',
     )

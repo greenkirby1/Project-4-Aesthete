@@ -17,3 +17,7 @@ class Comment(models.Model):
     blank=True
   )
   created_on = models.DateTimeField(default=timezone.now)
+
+
+  def __str__(self):
+    return f'Comment on {self.on_artwork.title} - {self.creator}'

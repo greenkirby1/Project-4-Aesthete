@@ -7,13 +7,13 @@ from users.models import User
 class UsernameDetailView(APIView):
 
   def get_queryset(self):
-    slug = self.kwargs['slug']
-    return User.objects.filter(username=slug)
+    username = self.kwargs['username']
+    return User.objects.filter(username=username)
   
 
 class UpdateLikesView(UpdateAPIView):
 
-  def patch(self, request, slug):
+  def patch(self, request, username):
     user = self.get_object()
     print('this is what you like ->', user)
     if not request.user in user.likes.all():

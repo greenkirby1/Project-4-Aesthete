@@ -16,10 +16,7 @@ class User(AbstractUser):
     related_name='liked_artists'
   )
 
-  # def get_absolute_url(self):
-  #   return reverse('user_detail', kwargs={'slug': self.slug})
-  
-  # def save(self, *args, **kwargs):
-  #   if not self.slug:
-  #     self.slug = slugify(self.username)
-  #   return super().save(*args, **kwargs)
+  def save(self, *args, **kwargs):
+    if self.password and not self.password.startswith('pbkdf2_sha256'):
+      self.set_password(self.password)
+    super().save(*args, **kwargs)

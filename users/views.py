@@ -24,12 +24,12 @@ class ProfileView(RetrieveUpdateAPIView):
   
 
 class UserDetailView(UsernameDetailView, RetrieveAPIView):
-  lookup_field = 'slug'
+  lookup_field = 'username'
   serializer_class = PopulatedUserSerializer
   permission_classes = [IsAuthenticated]
   
 
 class UserLikesView(UsernameDetailView, UpdateLikesView):
-  lookup_field = 'slug'
+  lookup_field = 'username'
   serializer_class = UserSerializer
   permission_classes = [IsAuthenticated]

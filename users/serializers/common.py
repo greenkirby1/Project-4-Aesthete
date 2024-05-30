@@ -33,7 +33,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     return User.objects.create_user(**validated_data)
   
 class UserSerializer(serializers.ModelSerializer):
-
   class Meta:
     model = User
     fields = (
@@ -71,4 +70,14 @@ class ProfileSerializer(serializers.ModelSerializer):
       'created_collection',
       'liked_artists',
       'curated_collection',
+    )
+
+
+class PreviewUserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields = (
+      'id', 
+      'username', 
+      'image', 
     )

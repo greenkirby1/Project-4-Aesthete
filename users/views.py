@@ -1,5 +1,6 @@
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.hashers import make_password
 from .models import User
 from .serializers.common import RegisterSerializer, ProfileSerializer, UserSerializer
 from .serializers.populated import PopulatedUserSerializer, PopulatedProfileSerializer
@@ -22,6 +23,16 @@ class ProfileView(RetrieveUpdateAPIView):
       return PopulatedProfileSerializer
     return ProfileSerializer
   
+  def perform_update(self, serializer):
+    password = serializer.validated_data.get('password')
+
+    if password:
+      serializer.validated_data['password'] = make_password(password)
+      print('changed password')
+
+    serializer.save()
+    
+
 
 class UserDetailView(UsernameDetailView, RetrieveAPIView):
   lookup_field = 'username'

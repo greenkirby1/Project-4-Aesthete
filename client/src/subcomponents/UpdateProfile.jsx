@@ -3,37 +3,57 @@ import axios from 'axios'
 
 export default function UpdateProfile() {
 
-  const fields = {
-    first_name: {
+  const fields = [
+    {
+      name: 'first_name',
       type: 'text',
       placeholder: 'Art'
     },
-    last_name: {
+    {
+      name: 'last_name', 
       type: 'text',
       placeholder: 'Afficiando'
     },
-    email: {
+    {
+      name: 'email',
       type: 'email',
       placeholder: 'e.g. aesthete@email.com'
     },
-    username: {
+    {
+      name: 'username',
       type: 'text',
       placeholder: 'e.g. a_person_who_likes_art'
     },
-    is_artist: 'checkbox',
-    password: {
+    {
+      name: 'is_artist',
+      type: 'checkbox'
+    },
+    {
+      name: 'password',
       type: 'password',
       placeholder: 'Create super secret password'
     },
-    image: {
+    { name: 'image',
       type: 'file',
       placeholder: 'Show yourself'
     },
-    facebook: 'url',
-    instagram: 'url',
-    twitter_x: 'url',
-    website: 'url'
-  }
+    {
+      name: 'facebook',
+      type: 'url'
+    },
+    {
+      name: 'instagram',
+      type: 'url'
+    },
+    {
+      name: 'twitter_x',
+      type: 'url'
+    },
+    {
+      name: 'website',
+      type: 'url'
+    }
+  ]
 
 
   async function handleProfileUpdate(formData) {

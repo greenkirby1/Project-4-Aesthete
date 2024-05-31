@@ -8,16 +8,18 @@ export default function Login() {
 
   const navigate = useNavigate()
 
-  const fields = {
-    username: {
+  const fields = [
+    {
+      name: 'username',
       type: 'text',
       placeholder: 'Enter unique username'
     },
-    password: {
+    {
+      name: 'password',
       type: 'password',
       placeholder: 'Enter super secret password'
     }
-  }
+  ]
 
   async function handleLogin(formData) {
     const { data: { token } } = await axios.post('/api/auth/login/', formData)
@@ -30,13 +32,13 @@ export default function Login() {
       <h1>Login here...</h1>
       <div className='login-form'>
         <h2>Welcome Back</h2>
-        <CustomForm 
+        <CustomForm
           request={handleLogin}
           fields={fields}
           submit='Enter the Gallery'
         />
+        <p>Haven&apos;t joined? <NavLink to='/join-us'>Join us here!</NavLink></p>
       </div>
-      <p>Haven&apos;t joined? <NavLink to='/join-us'>Join us here!</NavLink></p>
     </>
   )
 }

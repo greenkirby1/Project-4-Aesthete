@@ -3,21 +3,28 @@ import axios from 'axios'
 
 export default function UpdateArtwork() {
 
-  const fields = {
-    title: {
+  const fields = [
+    {
+      name: 'title',
       type: 'text',
       placeholder: 'What is this artwork called?'
     },
-    image: {
+    {
+      name: 'image',
       type: 'file',
       placeholder: 'Upload your beautiful work'
     },
-    year_created: {
+    {
+      name: 'year_created',
       type: 'number',
       placeholder: 'Enter the year it was made'
     },
-    caption: 'text'
-  }
+    {
+      name: 'caption',
+      type: 'text',
+      placeholder: 'What is your artwork about?'
+    }
+  ]
 
   async function handleUpdateArtwork(formData) {
     try {

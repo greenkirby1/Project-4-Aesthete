@@ -1,47 +1,67 @@
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import axios from 'axios'
+import CustomForm from '../subcomponents/CustomForm'
 
 
 export default function Register() {
 
-  const naviate = useNavigate()
+  const navigate = useNavigate()
 
-  const fields = {
-    first_name: {
+  const fields = [
+    {
+      name: 'first_name',
       type: 'text',
       placeholder: 'Art'
     },
-    last_name: {
+    {
+      name: 'last_name',
       type: 'text',
       placeholder: 'Afficiando'
     },
-    email: {
+    {
+      name: 'email',
       type: 'email',
       placeholder: 'e.g. aesthete@email.com'
     },
-    username: {
+    {
+      name : 'username',
       type: 'text',
       placeholder: 'e.g. a_person_who_likes_art'
     },
-    is_artist: 'checkbox',
-    password: {
+    {
+      name: 'is_artist',
+      type: 'checkbox'
+    },
+    {
+      name: 'password',
       type: 'password',
       placeholder: 'Create super secret password'
     },
-    passwordConfirmation: {
+    {
+      name: 'password_confirmation',
       type: 'password',
       placeholder: 'Repeat super secret password'
     }
-  }
+  ]
 
   async function handleRegister(formData) {
-    await axios.post('/api/auth/register', formData)
-    Navigate('/gallery')
+    console.log(formData)
+    await axios.post('/api/auth/register/', formData)
+    navigate('/gallery')
   }
 
   return (
     <>
       <h1>Register here...</h1>
+      <div className='register-form'>
+        <h2>Join Us</h2>
+        <CustomForm 
+          request={handleRegister} 
+          fields={fields} 
+          submit='Welcome to the Gallery'
+        />
+        <p>Already joined? <NavLink to='/join-us'>Welcome back!</NavLink></p>
+      </div>
     </>
   )
 }

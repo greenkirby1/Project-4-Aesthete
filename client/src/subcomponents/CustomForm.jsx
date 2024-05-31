@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Container, FormGroup, FormLabel, FormControl } from 'react-bootstrap'
+import { Container, FormGroup, FormLabel, FormControl, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 export default function CustomForm({ submit, fields, request, onLoad }) {
 
+  // const fieldsReduced = Object.fromEntries(
+  //   Object.entries(fields).map(([key, value]) => [key, value.type === 'multi' ? [] : ''])
+  // )
+
   const fieldsReduced = Object.fromEntries(
-    Object.entries(fields).map(([key, value]) => [key, value.type === 'multi' ? [] : ''])
+    fields.map(field => {
+      // console.log(field)
+      const { name, type } = field
+      return [name, type === 'multi' ? [] : '']
+    })
   )
+
+  const fieldsWithTitle = fields.map(field => {
+    return {
+      ...field,
+      title: field.name.split('_').map(word => {
+        return word !== 'is' ? word[0].toUpperCase() + word.slice(1) : ''
+      }).join(' ')
+    }
+  })
+
 
   // * State
   const [formData, setFormData] = useState(fieldsReduced)
@@ -33,15 +51,20 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
   }
 
   // ~ Handles Changes in input and checkbox value conversion
-  function handleChange(fieldName, e) {
+  function handleChange(name, e) {
     const { value } = e.target
     let parsedValue = value
-    if (fieldName === 'is_artist') {
-      parsedValue = value === 'on' ? true : false
+    if (name === 'is_artist') {
+      console.log(parsedValue)
+      if (parsedValue === 'on') {
+        parsedValue = true
+      } else {
+        parsedValue = false
+      }
     }
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [fieldName]: parsedValue
+      [name]: parsedValue
     }))
     setError('')
   }
@@ -61,19 +84,19 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
   }
 
   // ~ Handles general form updates
-  function handleTextChange(fieldName, e) {
+  function handleTextChange(name, e) {
     const { value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [fieldName]: value,
+      [name]: value,
     }))
   }
 
   // ~ Handles changes for multi-selects and updates data with values array
-  function handleMultiChange(fieldName, value) {
+  function handleMultiChange(name, value) {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [fieldName]: value ? value.map(option => option.value) : [],
+      [name]: value ? value.map(option => option.value) : [],
     }))
     setError('')
   }
@@ -93,47 +116,39 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
     }
   }, [onLoad])
 
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        {Object.entries(fields).map(([fieldName, fieldData]) => {
-          const capsFieldName = fieldName
-            .split('_')
-            .map(word => {
-              if (word !== 'is') {
-                return word.charAt(0).toUpperCase() + word.slice(1)
-              }
-            })
-            .join(' ')
+        {fieldsWithTitle.map(field => {
+            const { name, type, placeholder, title } = field
 
-          let value = formData[fieldName] || ''
-          // console.log(capsFieldName)
+          let value = formData[name] || ''
+
           return (
-            <FormGroup key={fieldName}>
-              <FormLabel className='field-name'>{capsFieldName}</FormLabel>
+            <FormGroup key={name}>
+              <FormLabel className='field-name'>{title}</FormLabel>
 
               {/* Image Upload */}
-              {fieldData.type === 'file' && (
+              {type === 'file' && (
                 <FormControl
-                  type={fieldData.type}
-                  name={fieldName}
-                  id={fieldName}
+                  type={type}
+                  name={name}
+                  id={name}
                   onChange={handleUpload}
                 />
               )}
 
               {/* Option Select */}
-              {fieldData.type === 'select' && (
+              {type === 'select' && (
                 <FormControl
                   as="select"
-                  name={fieldName}
-                  id={fieldName}
+                  name={name}
+                  id={name}
                   value={value}
-                  onChange={(e) => handleChange(fieldName)(e)}
+                  onChange={(e) => handleChange(name, e)}
                 >
-                  <option value=''>{capsFieldName}</option>
-                  {fieldData.options.map((option, idx) => (
+                  <option value=''>{title}</option>
+                  {field.options.map((option, idx) => (
                     <option key={idx} value={option}>
                       {option}
                     </option>
@@ -141,15 +156,25 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
                 </FormControl>
               )}
 
+              {/* Checkbox type */}
+              {type === 'checkbox' && (
+                <Form.Check
+                  type={type}
+                  id={name}
+                  name={name}
+                  onChange={(e) => handleChange(name, e)}
+                />
+              )}
+
               {/* Multiple Option Select */}
-              {fieldData.type !== 'select' && fieldData.type !== 'multi' && fieldData.type !== 'file' && (
+              {type !== ('select' && 'multi' && 'file' && 'checkbox') && (
                 <FormControl
-                  type={fieldData.type}
-                  id={fieldName}
-                  name={fieldName}
-                  value={formData[fieldName] || ''}
-                  onChange={(e) => handleTextChange(fieldName, e)}
-                  placeholder={fieldData.placeholder || fieldName}
+                  type={type}
+                  id={name}
+                  name={name}
+                  value={formData[name] || ''}
+                  onChange={(e) => handleTextChange(name, e)}
+                  placeholder={placeholder || name}
                 />
               )}
             </FormGroup>

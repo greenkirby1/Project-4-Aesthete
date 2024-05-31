@@ -60,7 +60,7 @@ export default function Register() {
           fields={fields} 
           submit='Welcome to the Gallery'
         />
-        <p>Already joined? <NavLink to='/join-us'>Welcome back!</NavLink></p>
+        <p>Already joined? <NavLink to='/welcome-back'>Welcome back!</NavLink></p>
       </div>
     </>
   )

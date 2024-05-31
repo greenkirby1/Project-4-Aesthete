@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 
 import TopNavbar from "./subcomponents/TopNavbar"
-import BottomNavbar from "./subcomponents/TopNavbar"
+import BottomNavbar from "./subcomponents/BottomNavbar"
 
 
 

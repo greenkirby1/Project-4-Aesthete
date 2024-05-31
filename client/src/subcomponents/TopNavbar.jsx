@@ -1,5 +1,6 @@
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { isLoggedIn, removeToken } from '../../lib/auth'
 
 
 export default function TopNavbar() {
@@ -11,13 +12,38 @@ export default function TopNavbar() {
 
   }, [location])
 
+  function handleLogOut() {
+    removeToken()
+    navigate('')
+  }
+
   return (
     <>
-      <nav className='topnav'>
-        <ul>
-
-        </ul>
-      </nav>
+      {isLoggedIn ?
+        <nav className='topnav'>
+          <div>
+            {location.pathname === '/gallery' ?
+              <>
+                <button className='my-collections-btn' onClick={() => navigate('/my-collections')}>My Collections</button>
+                <button className='logout-btn' onClick={handleLogOut}>Exit Gallery</button>
+              </>
+              :
+              location.pathname === '/my-collections' ?
+                <>
+                  <button className='profile-btn'>View Profile</button>
+                  <button className='curated-btn'>Curated Collection</button>
+                  <button className='logou-btn' onClick={handleLogOut}>Exit Gallery</button>
+                </>
+                :
+                <>
+                </>
+            }
+          </div>
+        </nav>
+        :
+        <>
+        </>
+      }
     </>
   )
 }

@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
+import { setToken } from '../../lib/auth'
+import CustomForm from '../subcomponents/CustomForm'
 
 
 export default function Login() {
@@ -7,7 +9,10 @@ export default function Login() {
   const navigate = useNavigate()
 
   const fields = {
-    username: 'username',
+    username: {
+      type: 'text',
+      placeholder: 'Enter unique username'
+    },
     password: {
       type: 'password',
       placeholder: 'Enter super secret password'
@@ -15,13 +20,23 @@ export default function Login() {
   }
 
   async function handleLogin(formData) {
-    const { data } = await axios.post('/api/auth/login', formData)
+    const { data: { token } } = await axios.post('/api/auth/login/', formData)
+    setToken(token)
     navigate('/gallery')
   }
 
   return (
     <>
       <h1>Login here...</h1>
+      <div className='login-form'>
+        <h2>Welcome Back</h2>
+        <CustomForm 
+          request={handleLogin}
+          fields={fields}
+          submit='Enter the Gallery'
+        />
+      </div>
+      <p>Haven&apos;t joined? <NavLink to='/join-us'>Join us here!</NavLink></p>
     </>
   )
 }

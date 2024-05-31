@@ -31,6 +31,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
   // * State
   const [formData, setFormData] = useState(fieldsReduced)
   const [error, setError] = useState('')
+  const [errors, setErrors] = useState()
 
 
   // * Cloudinary
@@ -42,34 +43,34 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
   // ~ Handles form submission
   async function handleSubmit(e) {
     e.preventDefault()
-    console.log('submitting:', formData)
+    // console.log('submitting:', formData)
     try {
       await request(formData)
     } catch (error) {
-      setError(error.response.data)
+      setErrors(error.response.data)
     }
   }
 
   // ~ Handles Changes in input and checkbox value conversion
-  function handleChange(name, e) {
-    const { value } = e.target
-    let parsedValue = value
-    if (name === 'is_artist') {
-      console.log(parsedValue)
-      if (parsedValue === 'on') {
-        parsedValue = true
-      } else {
-        parsedValue = false
-      }
-    }
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: parsedValue
-    }))
-    setError('')
-  }
+  // function handleChange(name, e) {
+  //   const { value } = e.target
+  //   let parsedValue = value
+  //   if (name === 'is_artist') {
+  //     console.log(parsedValue)
+  //     if (parsedValue === 'on') {
+  //       parsedValue = true
+  //     } else {
+  //       parsedValue = false
+  //     }
+  //   }
+  //   setFormData((prevFormData) => ({
+  //     ...prevFormData,
+  //     [name]: parsedValue
+  //   }))
+  //   setError('')
+  // }
 
-  // ~ Handles file upload to Clodinary
+  // ~ Handles file upload to Cloudinary
   async function handleUpload(e) {
     console.log('hit handle upload')
     const form = new FormData()
@@ -85,11 +86,9 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
 
   // ~ Handles general form updates
   function handleTextChange(name, e) {
-    const { value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }))
+    const { value } = e.target
+    setFormData({ ...formData, [name]: value })
+    setError('')
   }
 
   // ~ Handles changes for multi-selects and updates data with values array
@@ -101,6 +100,13 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
     setError('')
   }
 
+  function handleCheck(name, e) {
+    console.log(e.target.checked)
+    if (e.target.type === 'checkbox') {
+      setFormData({ ...formData, [name]: e.target.checked })
+    }
+  }
+
   // * Effect
   useEffect(() => {
     async function fillFields() {
@@ -108,7 +114,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
         const data = await onLoad()
         setFormData(data)
       } catch (error) {
-        setError(error.response.data)
+        setErrors(error.response.data)
       }
     }
     if (onLoad) {
@@ -120,7 +126,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
     <form onSubmit={handleSubmit}>
       <div>
         {fieldsWithTitle.map(field => {
-            const { name, type, placeholder, title } = field
+          const { name, type, placeholder, title } = field
 
           let value = formData[name] || ''
 
@@ -145,7 +151,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
                   name={name}
                   id={name}
                   value={value}
-                  onChange={(e) => handleChange(name, e)}
+                  onChange={(e) => handleTextChange(name, e)}
                 >
                   <option value=''>{title}</option>
                   {field.options.map((option, idx) => (
@@ -162,7 +168,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
                   type={type}
                   id={name}
                   name={name}
-                  onChange={(e) => handleChange(name, e)}
+                  onChange={(e) => handleCheck(name, e)}
                 />
               )}
 
@@ -180,6 +186,22 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
             </FormGroup>
           )
         })}
+        {errors ?
+          <ul>
+            {Object.entries(errors).map(error => {
+              const [field, [message]] = error
+              // console.log(field, message)
+              return (
+                <li key={field}>{field}: {message}</li>
+              )
+            })}
+          </ul>
+          :
+          error ?
+            <p>{error}</p>
+            :
+            <></>
+        }
         <button className='form-btn' type='submit'>{submit}</button>
       </div>
     </form>

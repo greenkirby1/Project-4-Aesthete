@@ -10,7 +10,7 @@ export default function Gallery() {
   useEffect(() => {
     async function getArtworks() {
       try {
-        const { data } = await axios.get('/api/artworks')
+        const { data } = await axios.get('/api/artworks/')
         console.log(data)
         setArtworks(data)
       } catch (error) {

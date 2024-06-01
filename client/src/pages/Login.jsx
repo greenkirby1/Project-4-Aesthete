@@ -23,6 +23,7 @@ export default function Login() {
 
   async function handleLogin(formData) {
     const { data: { token } } = await axios.post('/api/auth/login/', formData)
+    console.log(token)
     setToken(token)
     navigate('/gallery')
   }

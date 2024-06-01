@@ -16,15 +16,16 @@ export default function BottomNavbar() {
   }, [location])
 
   async function handleSearch() {
-    try {
-      const { data } = await axios.get(`/api/users/${search}`)
-    } catch (error) {
-      console.log
-    }
+    // try {
+    //   const { data } = await axios.get(`/api/users/${search}`)
+    // } catch (error) {
+    //   console.log
+    // }
+    navigate(`gallery/${search}`)
   }
 
-  function handleChange() {
-
+  function handleChange(e) {
+    setSearch(e.target.value)
   }
 
   return (

@@ -1,4 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  // min-width: 100vw;
-  // min-height: 100vh;
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+
+}
+
+#root {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  main {
+    flex-grow: 1;
+  }
+}
+
+canvas {
+  border: 1p solid black;
 }

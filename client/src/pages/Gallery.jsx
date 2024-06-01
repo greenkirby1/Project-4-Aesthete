@@ -23,6 +23,7 @@ export default function Gallery() {
   return (
     <>
       <h1>Welcome to the Gallery...</h1>
+      {/* <canvas width='100vw' height='100vh'></canvas> */}
     </>
   )
 }

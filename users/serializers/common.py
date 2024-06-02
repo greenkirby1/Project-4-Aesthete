@@ -33,6 +33,12 @@ class RegisterSerializer(serializers.ModelSerializer):
     return User.objects.create_user(**validated_data)
   
   
+class UsernameSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
+    fields = ('id', 'username',)
+
+
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User

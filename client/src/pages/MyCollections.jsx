@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { getToken } from '../../lib/auth'
+import { getToken, getUserId } from '../../lib/auth'
+import ArtworkCard from '../elements/ArtworkCard'
 
 export default function MyCollections() {
 
@@ -8,28 +9,54 @@ export default function MyCollections() {
   const [userId, setUserId] = useState('')
   const [error, setError] = useState('')
 
-  async function getProfile() {
-    try {
-      const { data } = await axios.get(`/api/auth/profile/${userId}/`)
-      setProfile(data)
-    } catch (error) {
-      setError(error.message)
-    }
-  }
-
-
   
   useEffect(() => {
-    function getUserId() {
-      const token = getToken()
-      console.log(token)
-    }
-    getUserId()
+    setUserId(getUserId)
   }, [])
+  
+  useEffect(() => {
+    async function getProfile() {
+      try {
+        const { data } = await axios.get(`/api/auth/profile/${userId}/`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`
+          }
+        })
+        console.log(data)
+        setProfile(data)
+      } catch (error) {
+        setError(error.response.statusText)
+      }
+    }
+    getProfile()
+  }, [userId])
 
   return (
     <>
-      <h1>View my own collections...</h1>
+      {profile ?
+        <div className='page-container'>
+          <h1>View my own collections...</h1>
+          <div className='collection-wrapper'>
+            {profile.created_collection ? 
+              profile.created_collection.map(artwork => {
+                const { added_on, caption, comments, id, image, likes, title, year_created } = artwork
+                return (
+                  <>
+                  <ArtworkCard key={id} artwork={artwork} />
+                  </>
+                )
+              })
+              :
+              <h2>You haven&apos;t created any artworks...</h2>
+            }
+          </div>
+        </div>
+        :
+        error ?
+          <p>{error}</p>
+          :
+          <h2>Loading...</h2>
+      }
     </>
   )
 }

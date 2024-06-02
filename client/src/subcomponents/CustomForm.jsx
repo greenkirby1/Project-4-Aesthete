@@ -4,7 +4,16 @@ import { Container, FormGroup, FormLabel, FormControl, Form } from 'react-bootst
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
-export default function CustomForm({ submit, fields, request, onLoad }) {
+export default function CustomForm({ 
+  submit, 
+  fields, 
+  request, 
+  onLoad, 
+  flipArtworkCard, 
+  setFlipArtworkCard,
+  flipUpdateArtworkCard,
+  setFlipUpdateArtworkCard
+}) {
 
   // const fieldsReduced = Object.fromEntries(
   //   Object.entries(fields).map(([key, value]) => [key, value.type === 'multi' ? [] : ''])
@@ -44,6 +53,8 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
   async function handleSubmit(e) {
     e.preventDefault()
     // console.log('submitting:', formData)
+    setFlipArtworkCard(!flipArtworkCard)
+    setFlipUpdateArtworkCard(!flipUpdateArtworkCard)
     try {
       await request(formData)
     } catch (error) {
@@ -78,8 +89,10 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
     form.append('upload_preset', uploadPreset)
     try {
       const { data } = await axios.post(uploadUrl, form)
+      console.log(data)
       setFormData({ ...formData, image: data.secure_url })
     } catch (error) {
+      console.log(error.message)
       setError(error.message)
     }
   }
@@ -114,6 +127,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
         const data = await onLoad()
         setFormData(data)
       } catch (error) {
+        // console.log(error.response)
         setErrors(error.response.data)
       }
     }
@@ -121,6 +135,7 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
       fillFields()
     }
   }, [onLoad])
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -173,16 +188,19 @@ export default function CustomForm({ submit, fields, request, onLoad }) {
               )}
 
               {/* Multiple Option Select */}
-              {type !== ('select' && 'multi' && 'file' && 'checkbox') && (
-                <FormControl
-                  type={type}
-                  id={name}
-                  name={name}
-                  value={formData[name] || ''}
-                  onChange={(e) => handleTextChange(name, e)}
-                  placeholder={placeholder || name}
-                />
-              )}
+              {type !== 'select' &&
+                type !== 'multi' &&
+                type !== 'file' &&
+                type !== 'checkbox' && (
+                  <FormControl
+                    type={type}
+                    id={name}
+                    name={name}
+                    value={formData[name] || ''}
+                    onChange={(e) => handleTextChange(name, e)}
+                    placeholder={placeholder || name}
+                  />
+                )}
             </FormGroup>
           )
         })}

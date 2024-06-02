@@ -45,7 +45,6 @@ export default function Register() {
   ]
 
   async function handleRegister(formData) {
-    console.log(formData)
     await axios.post('/api/auth/register/', formData)
     navigate('/gallery')
   }

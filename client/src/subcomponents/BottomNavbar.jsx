@@ -36,7 +36,7 @@ export default function BottomNavbar() {
             {location.pathname === '/gallery' ?
               <>
                 <button className='help-btn'>Help</button>
-                <form onSubmit={handleSearch}>
+                <form>
                   <input 
                     name='search' 
                     type="text" 
@@ -44,7 +44,7 @@ export default function BottomNavbar() {
                     onChange={handleChange}
                     value={search}
                   />
-                  <button type='submit'>Go</button>
+                  <button type='button' onClick={handleSearch}>Go</button>
                 </form>
               </>
               :

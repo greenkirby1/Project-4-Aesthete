@@ -12,7 +12,9 @@ export default function CustomForm({
   flipArtworkCard, 
   setFlipArtworkCard,
   flipUpdateArtworkCard,
-  setFlipUpdateArtworkCard
+  setFlipUpdateArtworkCard,
+  flipCreateArtworkCard,
+  setFlipCreateArtworkCard
 }) {
 
   // const fieldsReduced = Object.fromEntries(
@@ -53,8 +55,14 @@ export default function CustomForm({
   async function handleSubmit(e) {
     e.preventDefault()
     // console.log('submitting:', formData)
-    setFlipArtworkCard(!flipArtworkCard)
-    setFlipUpdateArtworkCard(!flipUpdateArtworkCard)
+    if (setFlipArtworkCard && setFlipUpdateArtworkCard) {
+      console.log('flip artwork')
+      setFlipArtworkCard(!flipArtworkCard)
+      setFlipUpdateArtworkCard(!flipUpdateArtworkCard)
+    } else if (setFlipCreateArtworkCard) {
+      console.log('flip create card')
+      setFlipCreateArtworkCard(!flipCreateArtworkCard)
+    }
     try {
       await request(formData)
     } catch (error) {

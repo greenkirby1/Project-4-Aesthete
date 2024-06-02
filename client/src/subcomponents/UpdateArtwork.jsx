@@ -39,7 +39,7 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
     try {
       await axios.put(`/api/artworks/${id}/`, formData, {
         headers: {
-          AUthorization: `Bearer ${getToken()}`
+          Authorization: `Bearer ${getToken()}`
         }
       })
     } catch (error) {
@@ -72,8 +72,18 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
           }
         </div>
         <p>Thia artwork has {likes.length} admirers.</p>
-        <button onClick={() => setFlipArtworkCard(!flipArtworkCard)} className='update-artwork-btn'>Back</button>
-        <button onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)} className='update-artwork-btn'>Change Details</button>
+        <button 
+          onClick={() => setFlipArtworkCard(!flipArtworkCard)} 
+          className='update-artwork-btn'
+        >
+          Back
+        </button>
+        <button 
+          onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)} 
+          className='update-artwork-btn'
+        >
+          Change Details
+        </button>
       </div>
       {/* Card Back */}
       <div className='update-form'>
@@ -87,6 +97,12 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
           flipUpdateArtworkCard={flipUpdateArtworkCard}
           setFlipUpdateArtworkCard={setFlipUpdateArtworkCard}
         />
+        <button 
+          onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)} 
+          className='cancel-btn'
+        >
+          Cancel
+        </button>
       </div>
     </ReactCardFlip>
   )

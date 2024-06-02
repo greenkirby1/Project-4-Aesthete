@@ -12,6 +12,9 @@ class ArtworkIndexView(ArtworkCommentsSerializer, ListCreateAPIView):
   queryset = Artwork.objects.all()
   permission_classes = [IsArtistOrReadOnly]
 
+  def perform_create(self, serializer):
+    serializer.save(creator=self.request.user)
+
 
 class ArtworkSingleView(ArtworkCommentsSerializer, RetrieveUpdateDestroyAPIView):
   queryset = Artwork.objects.all()

@@ -21,7 +21,6 @@ export default function ArtworkCard({ artwork }) {
         flipArtworkCard={flipArtworkCard} 
         setFlipArtworkCard={setFlipArtworkCard}
       />
-      
     </ReactCardFlip >
   )
 }

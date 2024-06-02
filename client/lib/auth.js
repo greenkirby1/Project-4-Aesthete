@@ -32,7 +32,6 @@ export function getUserId() {
 
   const payloadStr = token.split('.')[1]
   const payloadObj = JSON.parse(atob(payloadStr)) 
-  console.log(payloadObj.user_id)
 
   return payloadObj.user_id
 

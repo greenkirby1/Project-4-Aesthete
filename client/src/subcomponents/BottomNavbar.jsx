@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { isLoggedIn } from '../../lib/auth'
@@ -8,6 +8,7 @@ export default function BottomNavbar() {
 
   const location = useLocation()
   const navigate = useNavigate()
+  const params = useParams()
 
   const [search, setSearch] = useState('')
 
@@ -16,11 +17,6 @@ export default function BottomNavbar() {
   }, [location])
 
   async function handleSearch() {
-    // try {
-    //   const { data } = await axios.get(`/api/users/${search}`)
-    // } catch (error) {
-    //   console.log
-    // }
     navigate(`gallery/${search}`)
   }
 

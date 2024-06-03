@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { getToken } from '../lib/auth'
+import { getToken, getUserId } from '../lib/auth'
 
 
 export default function ArtistCollection() {
@@ -13,14 +13,19 @@ export default function ArtistCollection() {
   const [like, setLike] = useState('🤍')
 
 
-  async function sendLike() {
+  const sendLike = useCallback(async () => {
     try {
-      const { data } = await axios.patch(`/api/users/${params.username}`)
+      await axios.patch(`/api/users/${params.username}/like/`, null, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`
+        }
+      })
+      !artistCollection.likes.includes(getUserId) ? setLike('❤️') : setLike('🤍')
     } catch (error) {
       console.log(error)
     }
-  }
-
+  }, [artistCollection, params.username, setLike])
+  
 
   useEffect(() => {
     async function getArtistCollection() {
@@ -43,8 +48,8 @@ export default function ArtistCollection() {
       <div className='artist-page'>
         {artistCollection ? (
           <>
-            <h1>{artistCollection.username.toUpperCase()}&apos; Collection</h1>
-            <button>Like</button>
+            <h1>{artistCollection.username.toUpperCase()}&apos;s Collection</h1>
+            <button onClick={sendLike}>{like}</button>
             {artistCollection.created_collection.length ?
               artistCollection.created_collection.map(artwork => {
                 const { id, title, image, year_created, caption, added_on } = artwork
@@ -64,20 +69,6 @@ export default function ArtistCollection() {
             <h2>Loading...</h2>
         }
       </div>
-      {/* <div>
-        {artistCollection && artistCollection.created_collection.length ? 
-          artistCollection.created_collection.map(artwork => {
-            const { id, title, image, year_created, caption, added_on } = artwork
-            return (
-              <img key={title} src={image} alt={title} />
-            )
-          })
-          :
-          <>
-            <h2>Unfortunately {params.username} has not created a collection yet.</h2>
-          </>
-        }
-      </div> */}
     </>
   )
 }

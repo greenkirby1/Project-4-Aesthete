@@ -30,9 +30,11 @@ export default function Gallery() {
     setZoomIn({ ...zoomIn, activeId: id })
   }
 
-  function handleZoomOut() {
+  function handleZoomOut(e, id) {
     console.log('close')
-    setZoomIn({ ...zoomIn, activeId: '' })
+    if (id === zoomIn.activeId) {
+      setZoomIn({ ...zoomIn, activeId: '' })
+    }
   }
 
   function handleScroll(e) {
@@ -58,7 +60,7 @@ export default function Gallery() {
                 <img src={image} alt={title} />
                 <button 
                   className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}
-                  onClick={handleZoomOut}
+                  onClick={(e) => handleZoomOut(e, id)}
                 >
                   Close
                 </button>

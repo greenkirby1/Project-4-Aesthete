@@ -15,7 +15,7 @@ export default function BottomNavbar() {
   const [search, setSearch] = useState('')
   const [show, setShow] = useState(false)
 
-  function handleShow(e) {
+  function handleShow() {
     setShow(!show)
   }
 

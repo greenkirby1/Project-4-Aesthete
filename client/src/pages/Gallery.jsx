@@ -8,7 +8,10 @@ export default function Gallery() {
 
   const [artworks, setArtworks] = useState()
   const [error, setError] = useState('')
-  
+  const [zoomIn, setZoomIn] = useState({
+    activeId: ''
+  })
+
   useEffect(() => {
     async function getArtworks() {
       try {
@@ -21,7 +24,7 @@ export default function Gallery() {
     }
     getArtworks()
   }, [])
-  
+
 
   // const [context, setContext] = useState(null)
 
@@ -30,9 +33,9 @@ export default function Gallery() {
   // useEffect(() => {
   //   setContext(canvasRef.current.getContext('2d'))
   //   init()
-    
+
   // }, [canvasRef, init])
-  
+
   const spriteWidth = 250
   const spriteHeight = 300
   const spriteImg = new Image()
@@ -44,27 +47,53 @@ export default function Gallery() {
   //   context.fillRect(10 + delta, 10, 100, 100)
 
   // }
-  
-  const draw = (context, count) => {
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-    context.fillStyle = 'blue'
-    const delta = count % 800
-    context.fillRect(10 + delta, 10, 100, 100)
 
-  }
+  // const draw = (context, count) => {
+  //   context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+  //   context.fillStyle = 'blue'
+  //   const delta = count % 800
+  //   context.fillRect(10 + delta, 10, 100, 100)
 
-  function draw2(context, count) {
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-    spriteImg.onload = () => {
-      context.drawImage(spriteImg, 0, 0, 250, 300, 0, 0, 250, 300)
-    }
+  // }
+
+  // function draw2(context, count) {
+  //   context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+  //   spriteImg.onload = () => {
+  //     context.drawImage(spriteImg, 0, 0, 250, 300, 0, 0, 250, 300)
+  //   }
+  // }
+
+  function handleZoom(e, id) {
+    setZoomIn({ ...zoomIn, activeId: id })
   }
 
   return (
     <>
       <h1>Welcome to the Gallery...</h1>
+      <div className='gallery-container'>
+        {artworks ?
+          artworks.map(artwork => {
+            const { id, image, title, ...rest } = artwork
+            return (
+              <div
+                key={`${id}-${title.split(' ').join('-')}`}
+                onClick={(e, id) => handleZoom(e, id)}
+                className={`painting ${id === zoomIn.activeId ? 'zoomed-in' : ''}`}
+              >
+                <img src={image} alt={title} />
+                <button className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}>Close</button>
+              </div>
+            )
+          })
+          :
+          error ?
+            <h2>{error}</h2>
+            :
+            <h2>Loading...</h2>
+        }
+      </div>
       {/* <Canvas draw={draw} width='800' height='500' /> */}
-      <Canvas draw={draw2} width='800' height='500' />
+      {/* <Canvas draw={draw2} width='800' height='500' /> */}
     </>
   )
 }

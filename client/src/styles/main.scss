@@ -19,6 +19,30 @@ body {
   }
 }
 
+.gallery-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 canvas {
   border: 1p solid black;
+}
+
+.show-btn {
+  display: block;
+}
+
+.hide-btn {
+  display: none;
+}
+
+.zoomed-in {
+  transform: scale(1.7);
+  transform-origin: 0 0;
+}
+
+.painting img{
+  width: 500px;
+  height: 350px;
+  object-fit: cover;
 }

@@ -3,6 +3,7 @@ import axios from 'axios'
 import Canvas from '../subcomponents/Canvas'
 
 
+
 export default function Gallery() {
 
   const [artworks, setArtworks] = useState()
@@ -11,7 +12,7 @@ export default function Gallery() {
   useEffect(() => {
     async function getArtworks() {
       try {
-        const { data } = await axios.get('/api/artworks')
+        const { data } = await axios.get('/api/artworks/')
         console.log(data)
         setArtworks(data)
       } catch (error) {

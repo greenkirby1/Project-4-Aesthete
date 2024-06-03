@@ -1,30 +1,34 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { isLoggedIn } from '../../lib/auth'
+import Modal from 'react-bootstrap/Modal'
+import { ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap'
 
 
 export default function BottomNavbar() {
 
   const location = useLocation()
   const navigate = useNavigate()
+  const params = useParams()
 
   const [search, setSearch] = useState('')
+  const [show, setShow] = useState(false)
+
+  function handleShow(e) {
+    setShow(!show)
+  }
 
   useEffect(() => {
 
   }, [location])
 
   async function handleSearch() {
-    try {
-      const { data } = await axios.get(`/api/users/${search}`)
-    } catch (error) {
-      console.log
-    }
+    navigate(`gallery/${search}`)
   }
 
-  function handleChange() {
-
+  function handleChange(e) {
+    setSearch(e.target.value)
   }
 
   return (
@@ -34,8 +38,8 @@ export default function BottomNavbar() {
           <div>
             {location.pathname === '/gallery' ?
               <>
-                <button className='help-btn'>Help</button>
-                <form onSubmit={handleSearch}>
+                <button className='help-btn' onClick={handleShow}>Help</button>
+                <form>
                   <input 
                     name='search' 
                     type="text" 
@@ -43,7 +47,7 @@ export default function BottomNavbar() {
                     onChange={handleChange}
                     value={search}
                   />
-                  <button type='submit'>Go</button>
+                  <button type='button' onClick={handleSearch}>Go</button>
                 </form>
               </>
               :
@@ -52,7 +56,7 @@ export default function BottomNavbar() {
                   <button className='back-btn' onClick={() => navigate('/gallery')}>Back to Gallery</button>
                 </>
                 :
-                location.pathname === '/gallery/:username' ?
+                location.pathname === `/gallery/${params.username}` ?
                   <>
                     <button className='back-btn' onClick={() => navigate('/gallery')}>Back to Gallery</button>
                   </>
@@ -66,6 +70,23 @@ export default function BottomNavbar() {
         <>
         </>
       }
+      < Modal 
+        show={show} 
+        onHide={handleShow}
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
+        centered
+      >
+        <Modal.Header closeButton>
+          <ModalTitle>Help</ModalTitle>
+        </Modal.Header>
+        <ModalBody>
+          <p>To peruse this gallery full of unique works, created by even more unique individuals, 
+            press the LEFT and RIGHT key to move through the gallery. 
+            If you would like to look more closely at one of tme, 
+            simply click on the framed work to zoom in.</p>
+        </ModalBody>
+      </Modal>
     </>
   )
 }

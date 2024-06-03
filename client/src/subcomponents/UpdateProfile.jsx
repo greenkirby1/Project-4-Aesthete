@@ -1,13 +1,16 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getToken } from '../lib/auth'
 import ReactCardFlip from 'react-card-flip'
 import CustomForm from './CustomForm'
 
 
-export default function UpdateProfile({ profile, error, handleHide }) {
+export default function UpdateProfile({ profile, error }) {
 
   const [flipUpdateProfileCard, setFlipUpdateProfileCard] = useState(false)
+
+  const navigate = useNavigate()
 
   const fields = [
     {
@@ -70,10 +73,10 @@ export default function UpdateProfile({ profile, error, handleHide }) {
   }
 
   return (
-    <ReactCardFlip>
+    <ReactCardFlip isFlipped={flipUpdateProfileCard}>
       {/* Card Front */}
       <div className='profile-content'>
-        <button onClick={handleHide}>❌</button>
+        {/* <button onClick={handleHide}>❌</button> */}
         {profile ?
           <>
             <h4>
@@ -137,6 +140,12 @@ export default function UpdateProfile({ profile, error, handleHide }) {
             :
             <h4>Loading...</h4>
         }
+        <button
+          onClick={() => navigate('/my-collections')} 
+          className='update-profile-btn'
+        >
+          Back
+        </button>
         <button
           onClick={() => setFlipUpdateProfileCard(!flipUpdateProfileCard)} 
           className='update-profile-btn'

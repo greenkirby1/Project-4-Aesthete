@@ -47,6 +47,19 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
     }
   }
 
+  async function handleDelete() {
+    try {
+      console.log(id)
+      await axios.delete(`/api/artworks/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   function loadFields() {
     return artwork
   }
@@ -72,17 +85,23 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
           }
         </div>
         <p>Thia artwork has {likes.length} admirers.</p>
-        <button 
-          onClick={() => setFlipArtworkCard(!flipArtworkCard)} 
+        <button
+          onClick={() => setFlipArtworkCard(!flipArtworkCard)}
           className='update-artwork-btn'
         >
           Back
         </button>
-        <button 
-          onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)} 
+        <button
+          onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)}
           className='update-artwork-btn'
         >
           Change Details
+        </button>
+        <button
+          onClick={handleDelete}
+          className='update-artwork-btn'
+        >
+          Delete
         </button>
       </div>
       {/* Card Back */}
@@ -97,8 +116,8 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
           flipUpdateArtworkCard={flipUpdateArtworkCard}
           setFlipUpdateArtworkCard={setFlipUpdateArtworkCard}
         />
-        <button 
-          onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)} 
+        <button
+          onClick={() => setFlipUpdateArtworkCard(!flipUpdateArtworkCard)}
           className='cancel-btn'
         >
           Cancel

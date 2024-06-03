@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx'
 import MyCollections from './pages/MyCollections.jsx'
 import ArtistCollection from './pages/ArtistCollection.jsx'
 import Gallery from './pages/Gallery.jsx'
+import Profile from './pages/Profile.jsx'
 
 // Styles Imports
 import './styles/main.scss'
@@ -44,7 +45,10 @@ const router = createBrowserRouter([
         path: 'gallery/:username',
         element: <ArtistCollection />
       },
-
+      {
+        path: 'profile',
+        element: <Profile />
+      }
     ]
   }
 ])

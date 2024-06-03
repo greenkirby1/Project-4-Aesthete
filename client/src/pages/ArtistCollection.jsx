@@ -54,7 +54,7 @@ export default function ArtistCollection() {
               artistCollection.created_collection.map(artwork => {
                 const { id, title, image, year_created, caption, added_on } = artwork
                 return (
-                  <img key={title} src={image} alt={title} />
+                  <img key={title} src={image} alt={title}/>
                 )
               })
               :

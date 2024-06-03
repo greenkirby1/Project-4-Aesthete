@@ -7,7 +7,6 @@ export default function Directory({ liked_artists, show, handleShow }) {
 
   const navigate = useNavigate()
 
-  console.log(liked_artists)
 
   return (
     <>
@@ -23,7 +22,7 @@ export default function Directory({ liked_artists, show, handleShow }) {
         </ModalHeader>
         <ModalBody>
           <ul>
-            {liked_artists.length > 0 ?
+            {liked_artists && liked_artists.length > 0 ?
               liked_artists.map(artist => {
                 const { id, username, image } = artist
                 return (

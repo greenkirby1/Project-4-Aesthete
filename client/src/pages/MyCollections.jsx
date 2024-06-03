@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import ArtworkCard from '../elements/ArtworkCard'
 import CreateArtwork from '../subcomponents/CreateArtwork'
-import Directory from '../subcomponents/Directory'
 import { useOutletContext } from 'react-router-dom'
 
 export default function MyCollections() {
@@ -37,8 +36,6 @@ export default function MyCollections() {
                 :
                 <h2>You haven&apos;t created any artworks...</h2>
             }
-          <button onClick={handleShow}>Directory</button>
-          <Directory {...profile} show={show} handleShow={handleShow} />
           </div>
         </div>
         :

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useNavigate, NavLink } from 'react-router-dom'
-import { setToken } from '../../lib/auth'
+import { setToken } from '../lib/auth'
 import CustomForm from '../subcomponents/CustomForm'
 
 

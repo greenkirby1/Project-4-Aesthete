@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { isLoggedIn } from '../../lib/auth'
+import { isLoggedIn } from '../lib/auth'
 import Modal from 'react-bootstrap/Modal'
 import { ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap'
 

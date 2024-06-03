@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken } from '../lib/auth'
 
 
 export default function UpdateProfile() {

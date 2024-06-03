@@ -1,39 +1,17 @@
-import { useState, useEffect, useCallback } from 'react'
-import axios from 'axios'
-import { getToken, getUserId } from '../../lib/auth'
+import { useState } from 'react'
 import ArtworkCard from '../elements/ArtworkCard'
 import CreateArtwork from '../subcomponents/CreateArtwork'
 import Directory from '../subcomponents/Directory'
+import { useOutletContext } from 'react-router-dom'
 
 export default function MyCollections() {
 
-  const [profile, setProfile] = useState()
-  const [userId, setUserId] = useState('')
-  const [error, setError] = useState('')
+  const [profile, userId, error] = useOutletContext()
+  
   const [show, setShow] = useState(false)
 
 
-  useEffect(() => {
-    setUserId(getUserId)
-  }, [setUserId])
-
-  const getProfile = useCallback(async function () {
-    try {
-      const { data } = await axios.get(`/api/auth/profile/${userId}/`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`
-        }
-      })
-      setProfile(data)
-    } catch (error) {
-      setError(error.response.statusText)
-    }
-  }, [userId])
-
-  useEffect(() => {
-    getProfile()
-  }, [getProfile, userId])
-
+  
   function handleShow() {
     setShow(!show)
   }

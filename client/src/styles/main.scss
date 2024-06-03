@@ -24,10 +24,6 @@ body {
   justify-content: space-between;
 }
 
-canvas {
-  border: 1p solid black;
-}
-
 .show-btn {
   display: block;
 }
@@ -41,8 +37,53 @@ canvas {
   transform-origin: 0 0;
 }
 
+.not-active {
+  display: none;
+}
+
 .painting img{
   width: 500px;
   height: 350px;
   object-fit: cover;
+  margin: 0 30vmin;
+  border: 5vmin solid grey;
+  border-image: url('../assets/frame.png') 35 round;
+}
+
+.sprite {
+  width: 250px;
+  height: 300px;
+  background: url(../assets/sprite.png) 0 0;
+}
+
+.walk-right{
+  width: 250px;
+  height: 300px;
+  background: url(../assets/sprite.png) 0 -600px;
+  animation-name: right;
+  animation-duration: 0.8s;
+  animation-timing-function: steps(1);
+  animation-iteration-count: infinite;
+}
+
+@keyframes right {
+  0% {background: url(../assets/sprite.png) 0 -600px}
+  50% {background: url(../assets/sprite.png) -250px -600px}
+  100% {background: url(../assets/sprite.png) -500px -600px}
+}
+
+.walk-left{
+  width: 250px;
+  height: 300px;
+  background: url(../assets/sprite.png) 0 -300px;
+  animation-name: left;
+  animation-duration: 0.8s;
+  animation-timing-function: steps(1);
+  animation-iteration-count: infinite;
+}
+
+@keyframes left {
+  0% {background: url(../assets/sprite.png) 0 -300px}
+  50% {background: url(../assets/sprite.png) -250px -300px}
+  100% {background: url(../assets/sprite.png) -500px -300px}
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import Canvas from '../subcomponents/Canvas'
 
 
 
@@ -8,6 +7,7 @@ export default function Gallery() {
 
   const [artworks, setArtworks] = useState()
   const [error, setError] = useState('')
+  const [spriteMove, setSpriteMove] = useState('sprite')
   const [zoomIn, setZoomIn] = useState({
     activeId: ''
   })
@@ -26,45 +26,17 @@ export default function Gallery() {
   }, [])
 
 
-  // const [context, setContext] = useState(null)
-
-  // const canvasRef = useRef(null)
-
-  // useEffect(() => {
-  //   setContext(canvasRef.current.getContext('2d'))
-  //   init()
-
-  // }, [canvasRef, init])
-
-  const spriteWidth = 250
-  const spriteHeight = 300
-  const spriteImg = new Image()
-  spriteImg.src = '../assets/sprite.png'
-  // const draw = (context, count) => {
-  //   context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-  //   context.fillStyle = 'blue'
-  //   const delta = count % 800
-  //   context.fillRect(10 + delta, 10, 100, 100)
-
-  // }
-
-  // const draw = (context, count) => {
-  //   context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-  //   context.fillStyle = 'blue'
-  //   const delta = count % 800
-  //   context.fillRect(10 + delta, 10, 100, 100)
-
-  // }
-
-  // function draw2(context, count) {
-  //   context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-  //   spriteImg.onload = () => {
-  //     context.drawImage(spriteImg, 0, 0, 250, 300, 0, 0, 250, 300)
-  //   }
-  // }
-
-  function handleZoom(e, id) {
+  function handleZoomIn(e, id) {
     setZoomIn({ ...zoomIn, activeId: id })
+  }
+
+  function handleZoomOut() {
+    console.log('close')
+    setZoomIn({ ...zoomIn, activeId: '' })
+  }
+
+  function handleScroll(e) {
+    console.log(e)
   }
 
   return (
@@ -77,11 +49,19 @@ export default function Gallery() {
             return (
               <div
                 key={`${id}-${title.split(' ').join('-')}`}
-                onClick={(e, id) => handleZoom(e, id)}
-                className={`painting ${id === zoomIn.activeId ? 'zoomed-in' : ''}`}
+                onClick={(e) => handleZoomIn(e, id)}
+                className={
+                  `painting 
+                  ${id === zoomIn.activeId ? 'zoomed-in' : ''}`
+                }
               >
                 <img src={image} alt={title} />
-                <button className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}>Close</button>
+                <button 
+                  className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}
+                  onClick={handleZoomOut}
+                >
+                  Close
+                </button>
               </div>
             )
           })
@@ -92,8 +72,7 @@ export default function Gallery() {
             <h2>Loading...</h2>
         }
       </div>
-      {/* <Canvas draw={draw} width='800' height='500' /> */}
-      {/* <Canvas draw={draw2} width='800' height='500' /> */}
+      <div className={spriteMove} onScroll={handleScroll}></div>
     </>
   )
 }

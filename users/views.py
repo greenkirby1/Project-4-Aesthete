@@ -19,6 +19,9 @@ class RegisterView(CreateAPIView):
   queryset = User.objects.all()
   serializer_class = RegisterSerializer
 
+  # def perform_create(self, serializer):
+  #   print(serializer.validated_data)
+
 
 class ProfileView(RetrieveUpdateAPIView):
   queryset = User.objects.all()

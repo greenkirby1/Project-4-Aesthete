@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { getToken } from '../../lib/auth'
+import { getToken } from '../lib/auth'
 
 
 export default function ArtistCollection() {

@@ -1,6 +1,7 @@
 import { useNavigate, NavLink } from 'react-router-dom'
 import axios from 'axios'
 import CustomForm from '../subcomponents/CustomForm'
+import { setToken } from '../lib/auth'
 
 
 export default function Register() {
@@ -45,8 +46,8 @@ export default function Register() {
   ]
 
   async function handleRegister(formData) {
-    console.log(formData)
-    await axios.post('/api/auth/register/', formData)
+    const { data: { access } } = await axios.post('/api/auth/register/', formData)
+    setToken(access)
     navigate('/gallery')
   }
 

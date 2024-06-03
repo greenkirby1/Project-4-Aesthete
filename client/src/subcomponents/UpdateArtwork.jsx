@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import ReactCardFlip from 'react-card-flip'
-import { getToken } from '../../lib/auth'
+import { getToken } from '../lib/auth'
 import CustomForm from './CustomForm'
 
 
@@ -90,7 +90,7 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
         <CustomForm
           request={handleUpdateArtwork}
           fields={fields}
-          submit='Update Artwork'
+          submit='Save Changes'
           onLoad={loadFields}
           flipArtworkCard={flipArtworkCard}
           setFlipArtworkCard={setFlipArtworkCard}

@@ -41,7 +41,7 @@ export default function Root() {
 
   return(
     <>
-      <TopNavbar profile={profile}/>
+      <TopNavbar profile={profile} error={error}/>
       <main>
         <Outlet context={[profile, userId, error]}/>
       </main>

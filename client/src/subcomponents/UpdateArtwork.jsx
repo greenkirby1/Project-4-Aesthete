@@ -90,7 +90,7 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
         <CustomForm
           request={handleUpdateArtwork}
           fields={fields}
-          submit='Update Artwork'
+          submit='Save Changes'
           onLoad={loadFields}
           flipArtworkCard={flipArtworkCard}
           setFlipArtworkCard={setFlipArtworkCard}

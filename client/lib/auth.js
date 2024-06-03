@@ -1,18 +1,18 @@
 const tokenName = 'user-token'
 
-export function setToken(token){
+export function setToken(token) {
   localStorage.setItem(tokenName, token)
 }
 
-export function getToken(){
+export function getToken() {
   return localStorage.getItem(tokenName)
 }
 
-export function removeToken(){
+export function removeToken() {
   localStorage.removeItem(tokenName)
 }
 
-export function isLoggedIn(){
+export function isLoggedIn() {
   const token = getToken()
   if (!token) return false
   
@@ -24,4 +24,15 @@ export function isLoggedIn(){
   } else {
     return false
   }
+}
+
+export function getUserId() {
+  const token = getToken()
+  if (!token) return false
+
+  const payloadStr = token.split('.')[1]
+  const payloadObj = JSON.parse(atob(payloadStr)) 
+
+  return payloadObj.user_id
+
 }

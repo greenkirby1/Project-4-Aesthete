@@ -1,14 +1,20 @@
-from rest_framework.generics import CreateAPIView, RetrieveAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
 from .models import User
-from .serializers.common import RegisterSerializer, ProfileSerializer, UserSerializer
+from .serializers.common import RegisterSerializer, ProfileSerializer, UserSerializer, UsernameSerializer
 from .serializers.populated import PopulatedUserSerializer, PopulatedProfileSerializer
 from lib.permissions import IsCurrentUser
 from lib.views import UsernameDetailView, UpdateLikesView
 
 
 # Create your views here.
+class UserIndexView(ListAPIView):
+  queryset = User.objects.all()
+  serializer_class = UsernameSerializer
+  # permission_classes = [IsAuthenticated]
+
+
 class RegisterView(CreateAPIView):
   queryset = User.objects.all()
   serializer_class = RegisterSerializer

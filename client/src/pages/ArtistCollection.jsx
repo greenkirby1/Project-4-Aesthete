@@ -8,8 +8,19 @@ export default function ArtistCollection() {
 
   const params = useParams()
 
-  const [artistCollection, setArtistColelction] = useState()
+  const [artistCollection, setArtistCollection] = useState()
   const [error, setError] = useState('')
+  const [like, setLike] = useState('🤍')
+
+
+  async function sendLike() {
+    try {
+      const { data } = await axios.patch(`/api/users/${params.username}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   useEffect(() => {
     async function getArtistCollection() {
@@ -19,7 +30,7 @@ export default function ArtistCollection() {
             Authorization: `Bearer ${getToken()}`
           }
         })
-        setArtistColelction(data)
+        setArtistCollection(data)
       } catch (error) {
         setError(error.message)
       }
@@ -29,8 +40,31 @@ export default function ArtistCollection() {
 
   return (
     <>
-      <h1>View artist collection...</h1>
-      <div>
+      <div className='artist-page'>
+        {artistCollection ? (
+          <>
+            <h1>{artistCollection.username.toUpperCase()}&apos; Collection</h1>
+            <button>Like</button>
+            {artistCollection.created_collection.length ?
+              artistCollection.created_collection.map(artwork => {
+                const { id, title, image, year_created, caption, added_on } = artwork
+                return (
+                  <img key={title} src={image} alt={title} />
+                )
+              })
+              :
+              <h2>Unfortunately {params.username} has not created a collection yet.</h2>
+            }
+          </>
+        )
+          :
+          error ?
+            <h2>{error}</h2>
+            :
+            <h2>Loading...</h2>
+        }
+      </div>
+      {/* <div>
         {artistCollection && artistCollection.created_collection.length ? 
           artistCollection.created_collection.map(artwork => {
             const { id, title, image, year_created, caption, added_on } = artwork
@@ -43,7 +77,7 @@ export default function ArtistCollection() {
             <h2>Unfortunately {params.username} has not created a collection yet.</h2>
           </>
         }
-      </div>
+      </div> */}
     </>
   )
 }

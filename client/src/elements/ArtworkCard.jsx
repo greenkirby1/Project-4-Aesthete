@@ -2,7 +2,7 @@ import ReactCardFlip from 'react-card-flip'
 import { useState } from 'react'
 import UpdateArtwork from '../subcomponents/UpdateArtwork'
 
-export default function ArtworkCard({ artwork }) {
+export default function ArtworkCard({ artwork, styles }) {
 
   const { added_on, caption, comments, id, image, likes, title, year_created } = artwork
 
@@ -10,7 +10,7 @@ export default function ArtworkCard({ artwork }) {
 
 
   return (
-    <ReactCardFlip className='painting' isFlipped={flipArtworkCard}>
+    <ReactCardFlip style={styles.card} className='painting' isFlipped={flipArtworkCard}>
       {/* Card Front */}
       <div className='artwork-img'>
         <img onClick={() => setFlipArtworkCard(!flipArtworkCard)} src={image} alt={`${id}-${title}`} />
@@ -20,6 +20,7 @@ export default function ArtworkCard({ artwork }) {
         artwork={artwork} 
         flipArtworkCard={flipArtworkCard} 
         setFlipArtworkCard={setFlipArtworkCard}
+        styles={styles}
       />
     </ReactCardFlip >
   )

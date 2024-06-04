@@ -2,34 +2,39 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(ScrollTrigger)
 
 
 export default function Gallery() {
 
-  gsap.registerPlugin(useGSAP)
 
-  const gallery = useRef()
+  const container = useRef()
 
   const [scrollWidth, setScrollWidth] = useState('')
-  const [scrollDirection, setScrollDirection] = useState('up')
-  const [scrollY, setScrollY] = useState(0)
+  // const [scrollDirection, setScrollDirection] = useState('up')
+  // const [scrollY, setScrollY] = useState(0)
 
-  let sections = gsap.utils.toArray('.section')
-
+  
   useGSAP(() => {
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.painting-wrapper',
-        pin: true,
-        scrub: 1,
-        snap: 1 / (sections.length - 1),
-        end: () => '+=' + scrollWidth
-      }
-    })
-  }, { scope: gallery })
+    let sections = gsap.utils.toArray('.section')
+
+    if (sections) {
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: document.querySelector('.painting-wrapper'),
+          pin: true,
+          scrub: 1,
+          snap: 1 / (sections.length - 1),
+          end: () => '+=' + scrollWidth
+        }
+      })
+    }
+  }, { scope: container })
   
 
   const [artworks, setArtworks] = useState()
@@ -50,11 +55,11 @@ export default function Gallery() {
       }
     }
     getArtworks()
-    setScrollWidth(gallery.current.clientWidth)
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+    setScrollWidth(container.current.offsetWidth)
+    // window.addEventListener('scroll', handleScroll)
+    // return () => {
+    //   window.removeEventListener('scroll', handleScroll)
+    // }
 
   }, [])
 
@@ -76,21 +81,21 @@ export default function Gallery() {
   function handleScroll() {
     console.log('scrolling')
     console.log(window.scrollX)
-    setScrollY(window.scrollX)
+    // setScrollY(window.scrollX)
   }
 
-  function handleSpriteMove() {
-    if (scrollY - 0 > 17) {
-      setSpriteMove('right-walk')
-    } else {
-      setSpriteMove('left-walk')
-    }
-  }
-  
-  console.log(scrollY)
+  // function handleSpriteMove() {
+  //   if (scrollY - 0 > 17) {
+  //     setSpriteMove('right-walk')
+  //   } else {
+  //     setSpriteMove('left-walk')
+  //   }
+  // }
+
+
   return (
     <>
-      <div ref={gallery} className='painting-wrapper'>
+      <div ref={container} className='painting-wrapper'>
         {artworks ?
           artworks.map(artwork => {
             const { id, image, title, ...rest } = artwork
@@ -119,8 +124,8 @@ export default function Gallery() {
             :
             <h2>Loading...</h2>
         }
-      </div>
         <div className={`sprite walk-left ${spriteMove}`} ></div>
+      </div>
     </>
   )
 }

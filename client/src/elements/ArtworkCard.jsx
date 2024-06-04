@@ -10,7 +10,7 @@ export default function ArtworkCard({ artwork }) {
 
 
   return (
-    <ReactCardFlip isFlipped={flipArtworkCard}>
+    <ReactCardFlip className='painting' isFlipped={flipArtworkCard}>
       {/* Card Front */}
       <div className='artwork-img'>
         <img onClick={() => setFlipArtworkCard(!flipArtworkCard)} src={image} alt={`${id}-${title}`} />

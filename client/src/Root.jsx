@@ -5,10 +5,14 @@ import BottomNavbar from "./subcomponents/BottomNavbar"
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { getToken, getUserId } from './lib/auth'
+import { ParallaxProvider } from 'react-scroll-parallax'
+import { useLocation } from "react-router-dom"
 
 
 
 export default function Root() {
+
+  const location = useLocation()
 
   const [profile, setProfile] = useState()
   const [userId, setUserId] = useState('')
@@ -39,13 +43,13 @@ export default function Root() {
   }, [getProfile, userId])
 
 
-  return(
-    <>
-      <TopNavbar profile={profile} error={error}/>
-      <main>
-        <Outlet context={[profile, userId, error]}/>
+  return (
+    <ParallaxProvider>
+      <TopNavbar profile={profile} error={error} />
+      <main className={location.pathname === '/gallery' ? 'gallery-container' : ''}>
+        <Outlet context={[profile, userId, error]} />
       </main>
       <BottomNavbar />
-    </>
+    </ParallaxProvider>
   )
 }

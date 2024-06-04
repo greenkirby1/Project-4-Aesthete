@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import { useParallax } from 'react-scroll-parallax'
 
 
 
 export default function Gallery() {
+
+  const { ref } = useParallax({translateX: ['-100px', '200px']})
 
   const [artworks, setArtworks] = useState()
   const [error, setError] = useState('')
@@ -38,43 +41,45 @@ export default function Gallery() {
   }
 
   function handleScroll(e) {
-    console.log(e)
+    console.log('scrolling')
+    console.log(e.Key)
   }
 
   return (
     <>
-      <h1>Welcome to the Gallery...</h1>
-      <div className='gallery-container'>
-        {artworks ?
-          artworks.map(artwork => {
-            const { id, image, title, ...rest } = artwork
-            return (
-              <div
-                key={`${id}-${title.split(' ').join('-')}`}
-                onClick={(e) => handleZoomIn(e, id)}
-                className={
-                  `painting 
+      <div ref={ref} onKeyDown={handleScroll}>
+        <div className='painting-wrapper'>
+          {artworks ?
+            artworks.map(artwork => {
+              const { id, image, title, ...rest } = artwork
+              return (
+                <div
+                  key={`${id}-${title.split(' ').join('-')}`}
+                  onClick={(e) => handleZoomIn(e, id)}
+                  className={
+                    `painting 
                   ${id === zoomIn.activeId ? 'zoomed-in' : ''}`
-                }
-              >
-                <img src={image} alt={title} />
-                <button 
-                  className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}
-                  onClick={(e) => handleZoomOut(e, id)}
+                  }
                 >
-                  Close
-                </button>
-              </div>
-            )
-          })
-          :
-          error ?
-            <h2>{error}</h2>
+                  <img src={image} alt={title} />
+                  <button
+                    className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}
+                    onClick={(e) => handleZoomOut(e, id)}
+                  >
+                    Close
+                  </button>
+                </div>
+              )
+            })
             :
-            <h2>Loading...</h2>
-        }
+            error ?
+              <h2>{error}</h2>
+              :
+              <h2>Loading...</h2>
+          }
+        </div>
+        <div className={spriteMove} ></div>
       </div>
-      <div className={spriteMove} onScroll={handleScroll}></div>
     </>
   )
 }

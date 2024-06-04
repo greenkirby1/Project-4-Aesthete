@@ -21,7 +21,14 @@ body {
 
 .gallery-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  max-width: 2000px;
+  max-height: 100%;
+  overflow-x: scroll;
+}
+
+.painting-wrapper {
+  display: flex;
 }
 
 .show-btn {
@@ -41,13 +48,17 @@ body {
   display: none;
 }
 
-.painting img{
-  width: 500px;
+.painting {
+  // width: 500px;
   height: 350px;
-  object-fit: cover;
-  margin: 0 30vmin;
+  margin: 0 30vmin 5vmin 30vmin;
   border: 5vmin solid grey;
   border-image: url('../assets/frame.png') 35 round;
+  img {
+    object-fit: cover;
+    // max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 .sprite {

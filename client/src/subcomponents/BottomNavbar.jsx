@@ -31,47 +31,55 @@ export default function BottomNavbar() {
     setSearch(e.target.value)
   }
 
+  function handleExit() {
+    navigate('/gallery')
+    setSearch('')
+  }
+
   return (
     <>
-      {isLoggedIn ?
-        <nav className='topnav'>
-          <div>
-            {location.pathname === '/gallery' ?
-              <>
-                <button className='help-btn' onClick={handleShow}>Help</button>
-                <form>
-                  <input 
-                    name='search' 
-                    type="text" 
-                    placeholder='Search Artist...' 
-                    onChange={handleChange}
-                    value={search}
-                  />
-                  <button type='button' onClick={handleSearch}>Go</button>
-                </form>
-              </>
-              :
-              location.pathname === '/my-collections' ?
+      <footer>
+
+        {isLoggedIn ?
+          <nav className='bottomnav'>
+            <div className='nav-wrapper'>
+              {location.pathname === '/gallery' ?
                 <>
-                  <button className='back-btn' onClick={() => navigate('/gallery')}>Back to Gallery</button>
+                  <button className='help-btn' onClick={handleShow}>Help</button>
+                  <form>
+                    <input
+                      name='search'
+                      type="text"
+                      placeholder='Search Artist...'
+                      onChange={handleChange}
+                      value={search}
+                    />
+                    <button type='button' onClick={handleSearch}>Go</button>
+                  </form>
                 </>
                 :
-                location.pathname === `/gallery/${params.username}` ?
+                location.pathname === '/my-collections' ?
                   <>
                     <button className='back-btn' onClick={() => navigate('/gallery')}>Back to Gallery</button>
                   </>
                   :
-                  <>
-                  </>
-            }
-          </div>
-        </nav>
-        :
-        <>
-        </>
-      }
-      < Modal 
-        show={show} 
+                  location.pathname === `/gallery/${params.username}` ?
+                    <>
+                      <button className='back-btn' onClick={() => handleExit()}>Back to Gallery</button>
+                    </>
+                    :
+                    <>
+                    </>
+              }
+            </div>
+          </nav>
+          :
+          <>
+          </>
+        }
+      </footer>
+      < Modal
+        show={show}
         onHide={handleShow}
         size='lg'
         aria-labelledby='contained-modal-title-vcenter'
@@ -81,9 +89,9 @@ export default function BottomNavbar() {
           <ModalTitle>Help</ModalTitle>
         </Modal.Header>
         <ModalBody>
-          <p>To peruse this gallery full of unique works, created by even more unique individuals, 
-            press the LEFT and RIGHT key to move through the gallery. 
-            If you would like to look more closely at one of tme, 
+          <p>To peruse this gallery full of unique works, created by even more unique individuals,
+            press the LEFT and RIGHT key to move through the gallery.
+            If you would like to look more closely at one of tme,
             simply click on the framed work to zoom in.</p>
         </ModalBody>
       </Modal>

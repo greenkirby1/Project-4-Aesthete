@@ -29,7 +29,6 @@ export default function Login() {
 
   return (
     <>
-      <h1>Login here...</h1>
       <div className='login-form'>
         <h2>Welcome Back</h2>
         <CustomForm

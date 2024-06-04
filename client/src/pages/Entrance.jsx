@@ -15,9 +15,10 @@ export default function Entrance() {
 
   return (
     <>
-      <h1>Come on in...</h1>
-      <button className='register' onClick={handleClick}>Join Us</button>
-      <button className='login' onClick={handleClick}>Welcome Back</button>
+    <div className='entrance-page'>
+      <button className='register' onClick={handleClick} value='Join Us'></button>
+      <button className='login' onClick={handleClick} value='Welcome Back'></button>
+    </div>
     </>
   )
 }

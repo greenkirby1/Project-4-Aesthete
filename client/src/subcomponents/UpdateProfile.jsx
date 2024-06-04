@@ -6,13 +6,44 @@ import ReactCardFlip from 'react-card-flip'
 import CustomForm from './CustomForm'
 
 
-export default function UpdateProfile({ profile, error }) {
+export default function UpdateProfile({ profile, error, setProfile, setError }) {
+
+  const styles = {
+    card: {
+      padding: '1rem',
+      border: 'solid 5px black',
+      borderRadius: '10px',
+      backgroundColor: 'white',
+      width: '450px',
+      height: '650px',
+      display: 'flex',
+      justifyContent: 'space-evenly'
+    },
+    flipBtn: {
+      backgroundColor: 'var(--dark-color)',
+      border: 'none',
+      borderRadius: '10px',
+      color: 'white',
+      padding: '6px',
+      width: '80%',
+    }
+  }
 
   const [flipUpdateProfileCard, setFlipUpdateProfileCard] = useState(false)
 
   const navigate = useNavigate()
 
   const fields = [
+    {
+      name: 'first_name',
+      type: 'text',
+      placeholder: 'Art'
+    },
+    {
+      name: 'last_name',
+      type: 'text',
+      placeholder: 'Afficiando'
+    },
     {
       name: 'image',
       type: 'file',
@@ -39,30 +70,35 @@ export default function UpdateProfile({ profile, error }) {
     },
     {
       name: 'facebook',
-      type: 'url'
+      type: 'url',
+      placeholder: 'facebook.com/username'
     },
     {
       name: 'instagram',
-      type: 'url'
+      type: 'url',
+      placeholder: 'instagram.com/username'
     },
     {
       name: 'twitter_x',
-      type: 'url'
+      type: 'url',
+      placeholder: 'x.com/username'
     },
     {
       name: 'website',
-      type: 'url'
+      type: 'url',
+      placeholder: 'your-website.com'
     }
   ]
 
 
   async function handleProfileUpdate(formData) {
     try {
-      await axios.put(`api/auth/profile/${profile.id}/`, formData, {
+      const { data } = await axios.put(`api/auth/profile/${profile.id}/`, formData, {
         headers: {
           Authorization: `Bearer ${getToken()}`
         }
       })
+      setProfile(data)
     } catch (error) {
       console.log(error)
     }
@@ -75,7 +111,7 @@ export default function UpdateProfile({ profile, error }) {
   return (
     <ReactCardFlip isFlipped={flipUpdateProfileCard}>
       {/* Card Front */}
-      <div className='profile-content'>
+      <div className='profile-content' style={styles.card}>
         {/* <button onClick={handleHide}>❌</button> */}
         {profile ?
           <>
@@ -87,7 +123,7 @@ export default function UpdateProfile({ profile, error }) {
               }
             </h4>
             <div className='profile-wrapper-one'>
-              <img src={profile.image} alt={profile.username} />
+              <img className='profile-img' src={profile.image} alt={profile.username} />
               <div className='info-wrapper'>
                 <dl>
                   <dt>Full Name:</dt>
@@ -140,21 +176,23 @@ export default function UpdateProfile({ profile, error }) {
             :
             <h4>Loading...</h4>
         }
-        <button
-          onClick={() => navigate('/my-collections')} 
-          className='update-profile-btn'
-        >
-          Back
-        </button>
-        <button
-          onClick={() => setFlipUpdateProfileCard(!flipUpdateProfileCard)} 
-          className='update-profile-btn'
-        >
-          Change Details
-        </button>
+        <div className='btn-wrapper'>
+          <button
+            onClick={() => navigate('/my-collections')}
+            className='update-profile-btn'
+          >
+            Back
+          </button>
+          <button
+            onClick={() => setFlipUpdateProfileCard(!flipUpdateProfileCard)}
+            className='update-profile-btn'
+          >
+            Change Details
+          </button>
+        </div>
       </div>
       {/* Card Back */}
-      <div>
+      <div style={styles.card}>
         <CustomForm
           request={handleProfileUpdate}
           fields={fields}
@@ -163,8 +201,8 @@ export default function UpdateProfile({ profile, error }) {
           flipUpdateProfileCard={flipUpdateProfileCard}
           setFlipUpdateProfileCard={setFlipUpdateProfileCard}
         />
-        <button 
-          onClick={() => setFlipUpdateProfileCard(!flipUpdateProfileCard)} 
+        <button
+          onClick={() => setFlipUpdateProfileCard(!flipUpdateProfileCard)}
           className='cancel-btn'
         >
           Cancel

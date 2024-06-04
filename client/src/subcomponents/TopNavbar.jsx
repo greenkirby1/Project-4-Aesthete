@@ -30,32 +30,39 @@ export default function TopNavbar({ profile, error }) {
 
   return (
     <>
-      {isLoggedIn ?
-        <nav className='topnav'>
-          <div>
-            {location.pathname === '/gallery' ?
-              <>
-                <button className='my-collections-btn' onClick={() => navigate('/my-collections')}>My Collections</button>
-                <button className='logout-btn' onClick={handleLogOut}>Exit Gallery</button>
-              </>
-              :
-              location.pathname === '/my-collections' ?
+      <header>
+
+        {isLoggedIn ?
+          <nav className='topnav'>
+            <div className='nav-wrapper'>
+              {location.pathname === '/gallery' ?
                 <>
-                  <button className='profile-btn' onClick={() => navigate('/profile')}>View Profile</button>
-                  {/* <button className='curated-btn'>Curated Collection</button> */}
-                  <button className='directory-btn' onClick={handleShow}>Directory</button>
+                  <button className='my-collections-btn' onClick={() => navigate('/my-collections')}>My Collections</button>
                   <button className='logout-btn' onClick={handleLogOut}>Exit Gallery</button>
                 </>
                 :
-                <>
-                </>
-            }
-          </div>
-        </nav>
-        :
-        <>
-        </>
-      }
+                location.pathname === '/my-collections' ?
+                  <>
+                    <div className='nav-btn-wrapper'>
+                      <button className='profile-btn' onClick={() => navigate('/profile')}>View Profile</button>
+                      {/* <button className='curated-btn'>Curated Collection</button> */}
+                    </div>
+                    <div className='nav-btn-wrapper'>
+                      <button className='directory-btn' onClick={handleShow}>Directory</button>
+                      <button className='logout-btn' onClick={handleLogOut}>Exit Gallery</button>
+                    </div>
+                  </>
+                  :
+                  <>
+                  </>
+              }
+            </div>
+          </nav>
+          :
+          <>
+          </>
+        }
+      </header>
       <Directory {...profile} show={show} handleShow={handleShow} />
       {/* <Modal
         isOpen={showProfile}

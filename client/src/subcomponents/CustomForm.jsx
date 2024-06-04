@@ -14,7 +14,9 @@ export default function CustomForm({
   flipUpdateArtworkCard,
   setFlipUpdateArtworkCard,
   flipCreateArtworkCard,
-  setFlipCreateArtworkCard
+  setFlipCreateArtworkCard,
+  flipUpdateProfileCard,
+  setFlipUpdateProfileCard
 }) {
 
   // const fieldsReduced = Object.fromEntries(
@@ -28,6 +30,8 @@ export default function CustomForm({
       return [name, type === 'multi' ? [] : '']
     })
   )
+
+
 
   const fieldsWithTitle = fields.map(field => {
     return {
@@ -62,6 +66,9 @@ export default function CustomForm({
     } else if (setFlipCreateArtworkCard) {
       console.log('flip create card')
       setFlipCreateArtworkCard(!flipCreateArtworkCard)
+    } else if (setFlipUpdateProfileCard) {
+      console.log('flip profile card')
+      setFlipUpdateProfileCard(!flipUpdateProfileCard)
     }
     try {
       await request(formData)
@@ -148,9 +155,9 @@ export default function CustomForm({
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        {fieldsWithTitle.map(field => {
+        {formData && fieldsWithTitle.map(field => {
           const { name, type, placeholder, title } = field
-
+          
           let value = formData[name] || ''
 
           return (

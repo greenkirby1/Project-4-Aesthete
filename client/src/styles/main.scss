@@ -6,7 +6,8 @@ body {
   margin: 0;
   min-width: 100vw;
   min-height: 100vh;
-
+  // overflow-x: hidden;
+  // overflow-y: scroll;
 }
 
 #root {
@@ -16,15 +17,63 @@ body {
   flex-direction: column;
   main {
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
   }
 }
 
-.gallery-container {
+header {
+  position: fixed;
+  min-width: 100vw;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.help-btn {
+  margin: 0 2em 0 0;
+}
+
+.nav-wrapper {
   display: flex;
+  justify-content: space-between;
+}
+
+.logout-btn {
+  margin: 0 0 0 2em;
+}
+
+.entrance-page {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  min-height: 100vh;
+  align-items: flex-end;
+}
+
+.register {
+  background-image: url(../assets/signup.png);
+  width: 250px;
+  height: 300px;
+  background-color: transparent;
+  border: none;
+}
+
+.login {
+  background-image: url(../assets/login.png);
+  width: 250px;
+  height: 300px;
+  background-color: transparent;
+  border: none
+}
+
+.gallery-container {
+  // display: flex;
   flex-direction: column;
-  max-width: 2000px;
+  // max-width: 2000px;
   max-height: 100%;
-  overflow-x: scroll;
 }
 
 .painting-wrapper {
@@ -48,7 +97,7 @@ body {
   display: none;
 }
 
-.painting {
+.painting, .artwork-img {
   // width: 500px;
   height: 350px;
   margin: 0 30vmin 5vmin 30vmin;
@@ -61,7 +110,14 @@ body {
   }
 }
 
-.sprite {
+.artwork-details {
+  height: 350px;
+  margin: 0 30vmin 5vmin 30vmin;
+  border: 5vmin solid grey;
+  border-image: url('../assets/frame.png') 35 round;
+}
+
+.stand {
   width: 250px;
   height: 300px;
   background: url(../assets/sprite.png) 0 0;
@@ -97,4 +153,58 @@ body {
   0% {background: url(../assets/sprite.png) 0 -300px}
   50% {background: url(../assets/sprite.png) -250px -300px}
   100% {background: url(../assets/sprite.png) -500px -300px}
+}
+
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  h4 {
+    padding-left: 0.5em;
+    font-weight: bold;
+  }
+}
+
+.profile-wrapper-one {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5em;
+  img {
+    width: 160px;
+    height: 200px;
+    object-fit: cover;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    dd {
+      padding-bottom: 0.5em;
+    }
+  }
+}
+
+.profile-wrapper-two {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  dd {
+    padding-bottom: 0.5em;
+  }
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5em;
+  button {
+    padding: 0.3em 0.6em;
+    font-weight: bold;
+    border-radius: 10px;
+  }
 }

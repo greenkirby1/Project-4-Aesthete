@@ -93,10 +93,10 @@ class ProfileSerializer(serializers.ModelSerializer):
       'instagram',
       'twitter_x',
       'website',
-      'likes',
-      'created_collection',
-      'liked_artists',
-      'curated_collection',
+      # 'likes',
+      # 'created_collection',
+      # 'liked_artists',
+      # 'curated_collection',
     )
 
 

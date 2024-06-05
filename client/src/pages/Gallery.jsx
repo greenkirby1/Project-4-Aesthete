@@ -49,15 +49,20 @@ export default function Gallery() {
         setError(error.message)
       }
     }
+
+    
     getArtworks()
     setScrollWidth(gallery.current.clientWidth)
-    window.addEventListener('scroll', handleScroll)
+    document.addEventListener('keyDown', handleKeyDown)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('keyDown', handleKeyDown)
     }
-
+    
   }, [])
-
+  
+  function handleKeyDown(e) {
+    console.log(e.Key, 'is pressed!')
+  }
 
   function handleZoomIn(e, id) {
     setZoomIn({ ...zoomIn, activeId: id })
@@ -86,6 +91,7 @@ export default function Gallery() {
       setSpriteMove('left-walk')
     }
   }
+
   
   console.log(scrollY)
   return (

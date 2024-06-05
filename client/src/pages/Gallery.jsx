@@ -13,7 +13,6 @@ export default function Gallery() {
 
   const container = useRef()
 
-  const [scrollWidth, setScrollWidth] = useState('')
   // const [scrollDirection, setScrollDirection] = useState('up')
   // const [scrollY, setScrollY] = useState(0)
 
@@ -21,7 +20,8 @@ export default function Gallery() {
   useGSAP(() => {
     let sections = gsap.utils.toArray('.section')
 
-    if (sections) {
+    if (sections.length > 0) {
+      console.log(sections)
       gsap.to(sections, {
         xPercent: -100 * (sections.length - 1),
         ease: 'none',
@@ -30,7 +30,7 @@ export default function Gallery() {
           pin: true,
           scrub: 1,
           snap: 1 / (sections.length - 1),
-          end: () => '+=' + scrollWidth
+          end: () => '+=' + document.querySelector('.painting-wrapper').offsetWidth
         }
       })
     }
@@ -55,7 +55,6 @@ export default function Gallery() {
       }
     }
     getArtworks()
-    setScrollWidth(container.current.offsetWidth)
     // window.addEventListener('scroll', handleScroll)
     // return () => {
     //   window.removeEventListener('scroll', handleScroll)

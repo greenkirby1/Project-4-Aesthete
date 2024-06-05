@@ -1,43 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
+
+import Artworks from '../subcomponents/Artworks'
+
 
 
 
 export default function Gallery() {
 
-  gsap.registerPlugin(useGSAP)
-
-  const gallery = useRef()
-
-  const [scrollWidth, setScrollWidth] = useState('')
-  const [scrollDirection, setScrollDirection] = useState('up')
-  const [scrollY, setScrollY] = useState(0)
-
-  let sections = gsap.utils.toArray('.section')
-
-  useGSAP(() => {
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.painting-wrapper',
-        pin: true,
-        scrub: 1,
-        snap: 1 / (sections.length - 1),
-        end: () => '+=' + scrollWidth
-      }
-    })
-  }, { scope: gallery })
-  
-
+  // const [scrollWidth, setScrollWidth] = useState('')
+  // const [scrollDirection, setScrollDirection] = useState('up')
+  // const [scrollY, setScrollY] = useState(0)
   const [artworks, setArtworks] = useState()
   const [error, setError] = useState('')
   const [spriteMove, setSpriteMove] = useState('stand')
-  const [zoomIn, setZoomIn] = useState({
-    activeId: ''
-  })
+
+  
+  
+  
+  
+
 
   useEffect(() => {
     async function getArtworks() {
@@ -52,36 +34,22 @@ export default function Gallery() {
 
     
     getArtworks()
-    setScrollWidth(gallery.current.clientWidth)
-    document.addEventListener('keyDown', handleKeyDown)
+    document.addEventListener('scroll', handleScroll)
     return () => {
-      document.removeEventListener('keyDown', handleKeyDown)
+      document.removeEventListener('scroll', handleScroll)
     }
     
   }, [])
   
-  function handleKeyDown(e) {
-    console.log(e.Key, 'is pressed!')
-  }
+  // function handleKeyDown(e) {
+  //   console.log(e.Key, 'is pressed!')
+  // }
 
-  function handleZoomIn(e, id) {
-    setZoomIn({ ...zoomIn, activeId: id })
-  }
-
-  function handleZoomOut(e, id) {
-    e.stopPropagation()
-    console.log('close')
-    console.log(id, zoomIn)
-    if (id === zoomIn.activeId) {
-      console.log(id === zoomIn.activeId)
-      setZoomIn({ ...zoomIn, activeId: '' })
-    }
-  }
+  
   
   function handleScroll() {
     console.log('scrolling')
-    console.log(window.scrollX)
-    setScrollY(window.scrollX)
+    console.log(window.scrollY)
   }
 
   function handleSpriteMove() {
@@ -93,39 +61,18 @@ export default function Gallery() {
   }
 
   
-  console.log(scrollY)
   return (
     <>
-      <div ref={gallery} className='painting-wrapper'>
+      {/* <div ref={gallery} className='painting-wrapper'> */}
         {artworks ?
-          artworks.map(artwork => {
-            const { id, image, title, ...rest } = artwork
-            return (
-              <div
-                key={`${id}-${title.split(' ').join('-')}`}
-                onClick={(e) => handleZoomIn(e, id)}
-                className={
-                  `section painting 
-                  ${id === zoomIn.activeId ? 'zoomed-in' : ''}`
-                }
-              >
-                <img src={image} alt={title} />
-                <button
-                  className={id === zoomIn.activeId ? 'show-btn' : 'hide-btn'}
-                  onClick={(e) => handleZoomOut(e, id)}
-                >
-                  Close
-                </button>
-              </div>
-            )
-          })
+          <Artworks artworks={artworks} />
           :
           error ?
             <h2>{error}</h2>
             :
             <h2>Loading...</h2>
         }
-      </div>
+      {/* </div> */}
         <div className={`sprite walk-left ${spriteMove}`} ></div>
     </>
   )

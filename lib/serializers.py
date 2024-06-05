@@ -10,4 +10,3 @@ class ArtworkCommentsSerializer(APIView):
     if self.request.method == 'GET':
       return PopulatedArtworkSerializer
     return ArtworkSerializer
-  

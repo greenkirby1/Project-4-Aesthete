@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { isLoggedIn, removeToken } from '../lib/auth'
 import Modal from 'react-modal'
 import UpdateProfile from './UpdateProfile'
-import Directory from './Directory'
+import Directory from '../elements/Directory'
 
 
 export default function TopNavbar({ profile, error }) {

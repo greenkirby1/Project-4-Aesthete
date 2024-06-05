@@ -73,6 +73,7 @@ export default function CustomForm({
     try {
       await request(formData)
     } catch (error) {
+      console.log(error)
       setErrors(error.response.data)
     }
   }

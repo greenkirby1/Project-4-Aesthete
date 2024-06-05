@@ -13,14 +13,6 @@ export default function MyCollections() {
       display: 'flex',
       justifyContent: 'space-evenly'
     },
-    flipBtn: {
-      backgroundColor: 'var(--dark-color)',
-      border: 'none',
-      borderRadius: '10px',
-      color: 'white',
-      padding: '6px',
-      width: '80%',
-    }
   }
 
   const [profile, userId, error] = useOutletContext()
@@ -38,13 +30,12 @@ export default function MyCollections() {
     <>
       {profile ?
         <div className='page-container'>
-          <h1>View my own collections...</h1>
           <div className='collection-wrapper'>
-            {profile.created_collection.length ?
+            {profile.created_collection.length > 0 ?
               profile.created_collection.map(artwork => {
                 const { added_on, caption, comments, id, image, likes, title, year_created } = artwork
                 return (
-                  <ArtworkCard key={id} artwork={artwork} styles={styles}/>
+                  <ArtworkCard key={id} artwork={artwork} />
                 )
               })
               :

@@ -16,8 +16,6 @@ export default function Gallery() {
   
   
   const handleScroll = useCallback(() => {
-    console.log('scrolling')
-    console.log(window.scrollY)
     const scrollPost = window.scrollY
     
     if (scrollPost > prevScrollPost) {
@@ -39,7 +37,6 @@ export default function Gallery() {
     async function getArtworks() {
       try {
         const { data } = await axios.get('/api/artworks/')
-        console.log(data)
         setArtworks(data)
       } catch (error) {
         setError(error.message)

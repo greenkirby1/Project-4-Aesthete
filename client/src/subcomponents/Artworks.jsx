@@ -27,7 +27,7 @@ export default function Artworks({ artworks }) {
           pin: true,
           scrub: 1,
           // snap: 1 / (sections.length - 1),
-          end: () => '+=' + document.querySelector('.painting-wrapper').offsetWidth
+          end: () => '+=' + document.querySelector('.painting-wrapper').offsetWidth * 10
         }
       })
     }

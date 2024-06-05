@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import axios from 'axios'
 
 import Artworks from '../subcomponents/Artworks'
@@ -9,11 +9,12 @@ import Artworks from '../subcomponents/Artworks'
 export default function Gallery() {
 
   // const [scrollWidth, setScrollWidth] = useState('')
-  // const [scrollDirection, setScrollDirection] = useState('up')
   // const [scrollY, setScrollY] = useState(0)
   const [artworks, setArtworks] = useState()
   const [error, setError] = useState('')
   const [spriteMove, setSpriteMove] = useState('stand')
+  const [prevScrollPost, setPrevScrollPosition] = useState(0)
+  const [scrollDirection, setScrollDirection] = useState('')
 
   
   
@@ -21,6 +22,34 @@ export default function Gallery() {
   
 
 
+  
+  
+  const handleScroll = useCallback(() => {
+    console.log('scrolling')
+    console.log(window.scrollY)
+    const scrollPost = window.scrollY
+    
+    if (scrollPost > prevScrollPost) {
+      console.log('scrolling down')
+      console.log(scrollPost, prevScrollPost)
+      setScrollDirection('down')
+      setSpriteMove('walk-right')
+    } else if (scrollPost < prevScrollPost) {
+      console.log('scrolling up')
+      setScrollDirection('up')
+      console.log(scrollPost, prevScrollPost)
+      setSpriteMove('walk-left')
+    }
+    
+    setPrevScrollPosition(scrollPost)
+
+    if (scrollPost === prevScrollPost) {
+      console.log('standing')
+      setSpriteMove('stand')
+    }
+  }, [prevScrollPost])
+  
+  
   useEffect(() => {
     async function getArtworks() {
       try {
@@ -31,36 +60,18 @@ export default function Gallery() {
         setError(error.message)
       }
     }
-
-    
     getArtworks()
+  }, [])
+  
+
+  useEffect(() => {
     document.addEventListener('scroll', handleScroll)
     return () => {
       document.removeEventListener('scroll', handleScroll)
     }
-    
-  }, [])
-  
-  // function handleKeyDown(e) {
-  //   console.log(e.Key, 'is pressed!')
-  // }
+  }, [handleScroll])
 
-  
-  
-  function handleScroll() {
-    console.log('scrolling')
-    console.log(window.scrollY)
-  }
 
-  function handleSpriteMove() {
-    if (scrollY - 0 > 17) {
-      setSpriteMove('right-walk')
-    } else {
-      setSpriteMove('left-walk')
-    }
-  }
-
-  
   return (
     <>
       {/* <div ref={gallery} className='painting-wrapper'> */}
@@ -73,7 +84,7 @@ export default function Gallery() {
             <h2>Loading...</h2>
         }
       {/* </div> */}
-        <div className={`sprite walk-left ${spriteMove}`} ></div>
+        <div className={`sprite ${spriteMove}`} ></div>
     </>
   )
 }

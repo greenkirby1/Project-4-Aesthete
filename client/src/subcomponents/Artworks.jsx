@@ -7,7 +7,7 @@ gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
 
-export default function Artworks({ artworks }) {
+export default function Artworks({ artworks, setSpriteMove }) {
 
   const gallery = useRef()
 
@@ -29,6 +29,10 @@ export default function Artworks({ artworks }) {
           // snap: 1 / (sections.length - 1),
           end: () => '+=' + document.querySelector('.painting-wrapper').offsetWidth * 10
         }
+      })
+
+      ScrollTrigger.addEventListener('scrollEnd', () => {
+        setSpriteMove('stand')
       })
     }
   }, { scope: gallery })

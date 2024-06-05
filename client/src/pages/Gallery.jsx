@@ -8,20 +8,11 @@ import Artworks from '../subcomponents/Artworks'
 
 export default function Gallery() {
 
-  // const [scrollWidth, setScrollWidth] = useState('')
-  // const [scrollY, setScrollY] = useState(0)
   const [artworks, setArtworks] = useState()
   const [error, setError] = useState('')
   const [spriteMove, setSpriteMove] = useState('stand')
   const [prevScrollPost, setPrevScrollPosition] = useState(0)
   const [scrollDirection, setScrollDirection] = useState('')
-
-  
-  
-  
-  
-
-
   
   
   const handleScroll = useCallback(() => {
@@ -31,22 +22,16 @@ export default function Gallery() {
     
     if (scrollPost > prevScrollPost) {
       console.log('scrolling down')
-      console.log(scrollPost, prevScrollPost)
       setScrollDirection('down')
       setSpriteMove('walk-right')
     } else if (scrollPost < prevScrollPost) {
       console.log('scrolling up')
       setScrollDirection('up')
-      console.log(scrollPost, prevScrollPost)
       setSpriteMove('walk-left')
     }
     
     setPrevScrollPosition(scrollPost)
 
-    if (scrollPost === prevScrollPost) {
-      console.log('standing')
-      setSpriteMove('stand')
-    }
   }, [prevScrollPost])
   
   
@@ -74,16 +59,17 @@ export default function Gallery() {
 
   return (
     <>
-      {/* <div ref={gallery} className='painting-wrapper'> */}
         {artworks ?
-          <Artworks artworks={artworks} />
+          <Artworks 
+            artworks={artworks} 
+            setSpriteMove={setSpriteMove}
+          />
           :
           error ?
             <h2>{error}</h2>
             :
             <h2>Loading...</h2>
         }
-      {/* </div> */}
         <div className={`sprite ${spriteMove}`} ></div>
     </>
   )

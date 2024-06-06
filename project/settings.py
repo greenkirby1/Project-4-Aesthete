@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import environ
+import os
+import django_on_heroku
 
 env = environ.Env()
 environ.Env.read_env()
@@ -74,7 +76,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'client')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,14 +96,17 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('DB_NAME'),
-        'HOST': 'localhost',
-        'PORT': env('PORT'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASS')
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': env('PGDATABASE'),
+    'USER': env('PGUSER'),
+    'PASSWORD': env('PGPASSWORD'),
+    'HOST': env('PGHOST'),
+    'PORT': env('PGPORT'),
+    'OPTIONS': {
+      'sslmode': 'require',
+    },
+  }
 }
 
 AUTH_USER_MODEL = 'users.User'
@@ -146,3 +151,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = 'static/'
+
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'client', "dist"),
+)
+
+django_on_heroku.settings(locals())

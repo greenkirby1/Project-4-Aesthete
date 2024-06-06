@@ -4,8 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useRef, useState, useEffect } from 'react'
 import axios from 'axios'
 import Modal from 'react-modal'
-import { styles } from '../styles/inline'
-import { getToken } from '../lib/auth'
+import { styles } from '../../styles/inline'
+import { getToken } from '../../lib/auth'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)

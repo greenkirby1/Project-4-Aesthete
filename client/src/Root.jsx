@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 
-import TopNavbar from "./subcomponents/TopNavbar"
-import BottomNavbar from "./subcomponents/BottomNavbar"
+import TopNavbar from './components/subcomponents/TopNavbar'
+import BottomNavbar from './components/subcomponents/BottomNavbar'
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { getToken, getUserId } from './lib/auth'

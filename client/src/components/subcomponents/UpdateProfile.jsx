@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { getToken } from '../lib/auth'
+import { getToken } from '../../lib/auth'
 import ReactCardFlip from 'react-card-flip'
 import CustomForm from './CustomForm'
-import { styles } from '../styles/inline'
+import { styles } from '../../styles/inline'
 
 
-export default function UpdateProfile({ profile, error, setProfile, setError }) {
+export default function UpdateProfile({ profile, error, setProfile, setError, getProfile }) {
 
   const [flipUpdateProfileCard, setFlipUpdateProfileCard] = useState(false)
 
@@ -78,7 +78,7 @@ export default function UpdateProfile({ profile, error, setProfile, setError }) 
           Authorization: `Bearer ${getToken()}`
         }
       })
-      setProfile(data)
+      getProfile()
     } catch (error) {
       console.log(error)
     }

@@ -1,7 +1,7 @@
 import ReactCardFlip from 'react-card-flip'
 import { useState } from 'react'
 import UpdateArtwork from '../subcomponents/UpdateArtwork'
-import { styles } from '../styles/inline'
+import { styles } from '../../styles/inline'
 
 export default function ArtworkCard({ artwork, getProfile }) {
 

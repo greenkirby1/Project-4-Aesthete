@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import axios from 'axios'
 import ReactCardFlip from 'react-card-flip'
-import { getToken } from '../lib/auth'
+import { getToken } from '../../lib/auth'
 import CustomForm from './CustomForm'
-import { styles } from '../styles/inline'
+import { styles } from '../../styles/inline'
 import Modal from 'react-modal'
 
 
@@ -45,6 +45,7 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
           Authorization: `Bearer ${getToken()}`
         }
       })
+      getProfile()
     } catch (error) {
       console.log(error)
     }

@@ -4,13 +4,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './Root.jsx'
 
 // Page Imports
-import Entrance from './pages/Entrance.jsx'
-import Register from './pages/Register.jsx'
-import Login from './pages/Login.jsx'
-import MyCollections from './pages/MyCollections.jsx'
-import ArtistCollection from './pages/ArtistCollection.jsx'
-import Gallery from './pages/Gallery.jsx'
-import Profile from './pages/Profile.jsx'
+import Entrance from './components/pages/Entrance.jsx'
+import Register from './components/pages/Register.jsx'
+import Login from './components/pages/Login.jsx'
+import MyCollections from './components/pages/MyCollections.jsx'
+import ArtistCollection from './components/pages/ArtistCollection.jsx'
+import Gallery from './components/pages/Gallery.jsx'
+import Profile from './components/pages/Profile.jsx'
 
 // Styles Imports
 import './styles/main.scss'

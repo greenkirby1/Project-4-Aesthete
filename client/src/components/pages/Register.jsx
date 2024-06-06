@@ -1,7 +1,7 @@
 import { useNavigate, NavLink, useOutletContext } from 'react-router-dom'
 import axios from 'axios'
 import CustomForm from '../subcomponents/CustomForm'
-import { getUserId, setToken } from '../lib/auth'
+import { getUserId, setToken } from '../../lib/auth'
 
 
 export default function Register() {

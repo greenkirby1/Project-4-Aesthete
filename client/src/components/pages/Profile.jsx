@@ -12,6 +12,7 @@ export default function Profile() {
         error={error} 
         setProfile={setProfile} 
         setError={setError}
+        getProfile={getProfile}
       />
     </div>
   )

@@ -1,8 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { isLoggedIn, removeToken } from '../lib/auth'
-import Modal from 'react-modal'
-import UpdateProfile from './UpdateProfile'
+import { isLoggedIn, removeToken } from '../../lib/auth'
 import Directory from '../elements/Directory'
 
 

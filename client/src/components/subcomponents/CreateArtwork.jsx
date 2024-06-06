@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import ReactCardFlip from 'react-card-flip'
-import { getToken } from '../lib/auth'
+import { getToken } from '../../lib/auth'
 import CustomForm from './CustomForm'
 
 

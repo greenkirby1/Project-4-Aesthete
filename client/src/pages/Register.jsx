@@ -6,7 +6,7 @@ import { getUserId, setToken } from '../lib/auth'
 
 export default function Register() {
 
-  const [setUserId] = useOutletContext()
+  const [profile, setProfile, userId, setUserId, error, setError, getProfile] = useOutletContext()
 
   const navigate = useNavigate()
 

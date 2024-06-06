@@ -46,7 +46,7 @@ export default function Root() {
     <>
       <TopNavbar profile={profile} error={error} />
       <main className={location.pathname === '/gallery' ? 'gallery-container' : ''}>
-        <Outlet context={[profile, setProfile, userId, setUserId, error, setError]} />
+        <Outlet context={[profile, setProfile, userId, setUserId, error, setError, getProfile]} />
       </main>
       <BottomNavbar />
     </>

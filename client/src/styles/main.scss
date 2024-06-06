@@ -239,9 +239,34 @@ footer {
 .artwork-details,
 .update-form {
   height: 350px;
-  margin: 0 30vmin 5vmin 30vmin;
+  // margin: 0 30vmin 5vmin 30vmin;
   border: 5vmin solid grey;
   border-image: url('../assets/frame.png') 35 round;
+  background-color: antiquewhite;
+  background-clip: content-box;
+  input {
+    width: 350px;
+    border: 2.5px solid black;
+    border-radius: 0;
+    font-family: 'FT88 Bold';
+    margin-bottom: 1em;
+  }
+  label {
+    font-family: 'FT88 Bold';
+  }
+}
+
+.artwork-details {
+  background-color: antiquewhite;
+  background-clip: content-box;
+
+  h3 {
+    font-weight: bold;
+  }
+
+  p {
+    font-family: 'FT88 Bold';
+  }
 }
 
 .sprite {
@@ -432,6 +457,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: antiquewhite;
 
   // background-color: gray;
   .create-artwork-btn {
@@ -449,6 +475,7 @@ footer {
 
 .create-artwork-form {
   flex-direction: column;
+  height: 550px;
 }
 
 .painting-wrapper {
@@ -463,7 +490,7 @@ footer {
   justify-content: center;
   align-items: center;
   background-image: url('../assets/grid.png');
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-position: center;
 }
 
@@ -512,13 +539,15 @@ footer {
   padding: 1em;
   margin-bottom: 1em;
   overflow-y: scroll;
+  background-color: rgb(240, 208, 167);
+  font-family: 'FT88 Bold';
 }
 
 .artist-page {
   background-image: url('../assets/grid.png');
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-position: center;
-  height: 100vh;
+  height: 1000%;
   display: flex;
   flex-direction: column;
   align-items: center;

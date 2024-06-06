@@ -3,7 +3,7 @@ import { useState } from 'react'
 import UpdateArtwork from '../subcomponents/UpdateArtwork'
 import { styles } from '../styles/inline'
 
-export default function ArtworkCard({ artwork }) {
+export default function ArtworkCard({ artwork, getProfile }) {
 
   const { added_on, caption, comments, id, image, likes, title, year_created } = artwork
 
@@ -21,6 +21,7 @@ export default function ArtworkCard({ artwork }) {
         flipArtworkCard={flipArtworkCard} 
         setFlipArtworkCard={setFlipArtworkCard}
         styles={styles}
+        getProfile={getProfile}
       />
     </ReactCardFlip >
   )

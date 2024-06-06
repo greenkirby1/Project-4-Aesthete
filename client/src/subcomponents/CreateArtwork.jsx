@@ -5,7 +5,7 @@ import { getToken } from '../lib/auth'
 import CustomForm from './CustomForm'
 
 
-export default function CreateArtwork({ userId }) {
+export default function CreateArtwork({ userId, getProfile }) {
 
   const [flipCreateArtworkCard, setFlipCreateArtworkCard] = useState(false)
 
@@ -41,6 +41,7 @@ export default function CreateArtwork({ userId }) {
           Authorization: `Bearer ${getToken()}`
         }
       })
+      getProfile()
     } catch (error) {
       console.log(error)
     }

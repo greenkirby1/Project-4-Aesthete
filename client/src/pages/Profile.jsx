@@ -3,7 +3,7 @@ import UpdateProfile from '../subcomponents/UpdateProfile'
 
 export default function Profile() {
 
-  const [profile, setProfile, error, setError] = useOutletContext()
+  const [profile, setProfile, userId, setUserId, error, setError, getProfile] = useOutletContext()
 
   return (
     <div className='profile-page'>

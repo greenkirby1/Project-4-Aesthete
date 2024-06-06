@@ -4,30 +4,10 @@ import axios from 'axios'
 import { getToken } from '../lib/auth'
 import ReactCardFlip from 'react-card-flip'
 import CustomForm from './CustomForm'
+import { styles } from '../styles/inline'
 
 
 export default function UpdateProfile({ profile, error, setProfile, setError }) {
-
-  const styles = {
-    card: {
-      padding: '1rem',
-      border: 'solid 5px black',
-      borderRadius: '10px',
-      backgroundColor: 'white',
-      width: '450px',
-      height: '650px',
-      display: 'flex',
-      justifyContent: 'space-evenly'
-    },
-    flipBtn: {
-      backgroundColor: 'var(--dark-color)',
-      border: 'none',
-      borderRadius: '10px',
-      color: 'white',
-      padding: '6px',
-      width: '80%',
-    }
-  }
 
   const [flipUpdateProfileCard, setFlipUpdateProfileCard] = useState(false)
 
@@ -111,7 +91,7 @@ export default function UpdateProfile({ profile, error, setProfile, setError }) 
   return (
     <ReactCardFlip isFlipped={flipUpdateProfileCard}>
       {/* Card Front */}
-      <div className='profile-content' style={styles.card}>
+      <div className='profile-content' style={styles.profileCard}>
         {/* <button onClick={handleHide}>❌</button> */}
         {profile ?
           <>

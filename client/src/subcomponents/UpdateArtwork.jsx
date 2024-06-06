@@ -7,7 +7,7 @@ import { styles } from '../styles/inline'
 import Modal from 'react-modal'
 
 
-export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtworkCard }) {
+export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtworkCard, getProfile }) {
 
   const { added_on, caption, comments, id, image, likes, title, year_created } = artwork
 
@@ -58,6 +58,7 @@ export default function UpdateArtwork({ artwork, flipArtworkCard, setFlipArtwork
         }
       })
       setShow(!show)
+      getProfile()
     } catch (error) {
       console.log(error)
     }

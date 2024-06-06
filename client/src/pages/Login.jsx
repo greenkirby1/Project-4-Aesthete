@@ -27,22 +27,22 @@ export default function Login() {
   async function handleLogin(formData) {
     const { data: { access } } = await axios.post('/api/auth/login/', formData)
     setToken(access)
-    console.log('before')
     setUserId(getUserId())
-    console.log('after')
     navigate('/gallery')
   }
 
   return (
     <>
       <div className='login-form'>
-        <h2>Welcome Back</h2>
-        <CustomForm
-          request={handleLogin}
-          fields={fields}
-          submit='Enter the Gallery'
-        />
-        <p>Haven&apos;t joined? <NavLink to='/join-us'>Join us here!</NavLink></p>
+        <div className='form-container'>
+          <h1>Welcome Back</h1>
+          <CustomForm
+            request={handleLogin}
+            fields={fields}
+            submit='Enter the Gallery'
+          />
+          <p>Haven&apos;t joined? <NavLink to='/join-us'>Join us here!</NavLink></p>
+        </div>
       </div>
     </>
   )

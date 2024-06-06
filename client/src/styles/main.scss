@@ -9,6 +9,16 @@
   src: url('../assets/PhospheneFont-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'FT88 Bold';
+  src: url('../assets/FT88-Bold.otf');
+}
+
+@font-face {
+  font-family: 'FT88 School';
+  src: url('../assets/FT88-School.otf');
+}
+
 html {
   overflow-y: scroll;
   height: 100%;
@@ -42,7 +52,7 @@ header {
   position: fixed;
   z-index: 1;
   min-width: 100vw;
-  font-family: 'Phosphene Reg', 'VT323', monospace;
+  font-family: 'FT88 School', 'VT323', monospace;
   font-size: 1.3em;
   padding: 10px 20px;
 
@@ -60,7 +70,7 @@ header {
 footer {
   position: fixed;
   bottom: 0;
-  font-family: 'Phosphene Reg', 'VT323', monospace;
+  font-family: 'FT88 School', 'VT323', monospace;
   font-size: 1.3em;
   padding: 10px 20px;
 
@@ -96,6 +106,61 @@ footer {
   width: 100%;
   min-height: 100vh;
   align-items: flex-end;
+  background-image: url('../assets/entrance.png');
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background-color: white;
+
+  .form-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    padding: 2em;
+    border: 5vmin solid grey;
+    border-image: url('../assets/frame.png') 35 round;
+    background-color: rgb(231, 220, 207);
+    font-family: 'FT88 Bold';
+
+    h1 {
+      font-family: 'FT88 School';
+      font-weight: bold;
+      font-size: 1.8em;
+    }
+
+    div {
+      margin-bottom: 1em;
+
+      input {
+        border: 2.5px solid black;
+        border-radius: 0;
+      }
+
+      button {
+        width: 200px;
+        // margin: 0 5.5em;
+      }
+
+      p {
+        a:link {
+          color: black;
+        }
+
+        a:hover {
+          color: white;
+        }
+      }
+    }
+  }
 }
 
 .register {
@@ -143,8 +208,21 @@ footer {
 //   }
 // }
 
-.painting,
 .artwork-img {
+  img {
+    width: 350px;
+    // margin: 0 30vmin 5vmin 30vmin;
+    border: 5vmin solid grey;
+    border-image: url('../assets/frame.png') 35 round;
+    object-fit: cover;
+    // max-width: 100%;
+    max-height: 100%;
+    background-color: antiquewhite;
+    background-clip: content-box;
+  }
+}
+
+.painting {
   img {
     height: 350px;
     // margin: 0 30vmin 5vmin 30vmin;
@@ -153,10 +231,13 @@ footer {
     object-fit: cover;
     // max-width: 100%;
     max-height: 100%;
+    background-color: antiquewhite;
+    background-clip: content-box;
   }
 }
 
-.artwork-details, .update-form {
+.artwork-details,
+.update-form {
   height: 350px;
   margin: 0 30vmin 5vmin 30vmin;
   border: 5vmin solid grey;
@@ -235,14 +316,18 @@ footer {
 .profile-content {
   display: flex;
   flex-direction: column;
-  font-family: 'Phosphene Reg';
+  font-family: 'FT88 Bold';
 
   h4 {
+    font-family: 'FT88 School';
+    font-weight: bold;
     padding-left: 0.5em;
     // font-weight: bold;
     font-size: 2em;
   }
 }
+
+.default-user {}
 
 .profile-wrapper-one {
   display: flex;
@@ -291,6 +376,34 @@ footer {
   }
 }
 
+.profile-form,
+.create-artwork-form {
+  overflow-y: scroll;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'FT88 Bold';
+
+  h1 {
+    font-family: 'FT88 School';
+    font-weight: bold;
+    font-size: 1.8em;
+  }
+
+  div {
+    margin-bottom: 1em;
+
+    input {
+      border: 2.5px solid black;
+      border-radius: 0;
+    }
+
+    button {
+      width: 200px;
+      // margin: 0 5.5em;
+    }
+  }
+}
+
 .collection-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -304,7 +417,7 @@ footer {
   background-position: contain;
   background-repeat: no-repeat;
   height: 100vh;
-  min-width: 600px;  
+  min-width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -319,7 +432,19 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+
   // background-color: gray;
+  .create-artwork-btn {
+    width: 200px;
+    height: 200px;
+    font-family: 'FT88 School';
+    font-size: 7em;
+  }
+}
+
+.create-artwork {
+  background-color: antiquewhite;
+  background-clip: content-box;
 }
 
 .create-artwork-form {
@@ -337,6 +462,9 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('../assets/grid.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .modal-wrapper {
@@ -355,11 +483,13 @@ footer {
 
 .directory-list {
   list-style: none;
+
   li {
     padding: 1em;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+
     img {
       width: 100px;
       height: 100px;
@@ -381,4 +511,46 @@ footer {
   height: 200px;
   padding: 1em;
   margin-bottom: 1em;
+  overflow-y: scroll;
+}
+
+.artist-page {
+  background-image: url('../assets/grid.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .artist-page-top {
+    display: flex;
+    margin: 2em;
+
+    h1 {
+      width: 400px;
+      height: 180px;
+      text-align: center;
+      border: 5vmin solid grey;
+      border-image: url('../assets/frame.png') 35 round;
+      background-color: antiquewhite;
+      background-clip: content-box;
+      font-family: 'FT88 School';
+      font-weight: bold;
+    }
+
+    button {
+      width: 50px;
+      height: 50px;
+      margin-left: 2em;
+    }
+  }
+
+  .artist-page-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
 }

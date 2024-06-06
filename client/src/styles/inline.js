@@ -2,7 +2,7 @@ export const styles = {
   modal: {
     content: {
       color: 'black',
-      fontFamily: 'Phosphene Reg',
+      fontFamily: 'FT88 Bold',
       margin: '30px 60px',
     },
     overlay: {
@@ -17,7 +17,7 @@ export const styles = {
     flexDirection: 'column',
     // justifyContent: 'space-around',
     alignItems: 'center',
-    fontFamily: 'Phosphene Reg',
+    fontFamily: 'FT88 School',
   },
 
 }

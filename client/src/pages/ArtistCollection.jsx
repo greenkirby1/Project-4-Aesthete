@@ -53,10 +53,13 @@ export default function ArtistCollection() {
       <div className='artist-page'>
         {artistCollection ? (
           <>
-            <h1>{artistCollection.username.toUpperCase()}&apos;s Collection</h1>
+          <div className='artist-page-top'>
+            <h1>{artistCollection.username}&apos;s Collection</h1>
+            <button onClick={sendLike}>{like}</button>
+          </div>
+            <div className='artist-page-wrapper'>
             {artistCollection.created_collection.length ? (
               <>
-                <button onClick={sendLike}>{like}</button>
                 {artistCollection.created_collection.map(artwork => {
                   const { id, title, image, year_created, caption, added_on } = artwork
                   return (
@@ -67,10 +70,11 @@ export default function ArtistCollection() {
                 })
                 }
               </>
-            )
+              )
               :
               <h2>Unfortunately {params.username} has not created a collection.</h2>
             }
+            </div>
           </>
         )
           :

@@ -7,14 +7,16 @@ class Comment(models.Model):
     'users.User',
     related_name='comments_created',
     on_delete=models.CASCADE,
-    blank=True
+    blank=True,
+    # null=True
   )
   text = models.TextField(max_length=1000)
   on_artwork = models.ForeignKey(
     'artworks.Artwork',
     related_name='comments',
     on_delete=models.CASCADE,
-    blank=True
+    # blank=True,
+    null=True
   )
   created_on = models.DateTimeField(default=timezone.now)
 

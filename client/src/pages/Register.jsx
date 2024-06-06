@@ -27,7 +27,7 @@ export default function Register() {
       placeholder: 'e.g. aesthete@email.com'
     },
     {
-      name : 'username',
+      name: 'username',
       type: 'text',
       placeholder: 'e.g. a_person_who_likes_art'
     },
@@ -56,15 +56,16 @@ export default function Register() {
 
   return (
     <>
-      <h1>Register here...</h1>
       <div className='register-form'>
-        <h2>Join Us</h2>
-        <CustomForm 
-          request={handleRegister} 
-          fields={fields} 
-          submit='Welcome to the Gallery'
-        />
-        <p>Already joined? <NavLink to='/welcome-back'>Welcome back!</NavLink></p>
+        <div className='form-container'>
+          <h1>Join Us</h1>
+          <CustomForm
+            request={handleRegister}
+            fields={fields}
+            submit='Welcome to the Gallery'
+          />
+          <p>Already joined? <NavLink to='/welcome-back'>Welcome back!</NavLink></p>
+        </div>
       </div>
     </>
   )

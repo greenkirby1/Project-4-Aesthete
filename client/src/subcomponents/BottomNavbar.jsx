@@ -2,9 +2,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { isLoggedIn } from '../lib/auth'
-import Modal from 'react-bootstrap/Modal'
-import { ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap'
-
+import Modal from 'react-modal'
+import { styles } from '../styles/inline'
 
 export default function BottomNavbar() {
 
@@ -79,21 +78,22 @@ export default function BottomNavbar() {
         }
       </footer>
       < Modal
-        show={show}
-        onHide={handleShow}
-        size='lg'
-        aria-labelledby='contained-modal-title-vcenter'
-        centered
+        isOpen={show}
+        onRequestClose={handleShow}
+        style={styles.modal}
+        contentLabel='Help Modal'
+        shouldCloseOnOverlayClick={false}
       >
-        <Modal.Header closeButton>
-          <ModalTitle>Help</ModalTitle>
-        </Modal.Header>
-        <ModalBody>
-          <p>To peruse this gallery full of unique works, created by even more unique individuals,
-            press the LEFT and RIGHT key to move through the gallery.
-            If you would like to look more closely at one of tme,
-            simply click on the framed work to zoom in.</p>
-        </ModalBody>
+          <h4>Help</h4>
+          <button className='help-close-btn' onClick={handleShow}>X</button>
+          <h5>How to walk through the gallery?</h5>
+          <p>To peruse this gallery full of unique works, <span>scroll</span> with your mouse to move <span>left</span> and <span>right</span> through the gallery.
+            If you would like to view the informtaion about the artwork you&apos;re looking at,
+            simply click on the info card to the right.</p>
+          <h5>Where to view your collections?</h5>
+          <p>Just click <span>My Collections</span> on your top left.</p>
+          <h5>Can I search for my favourite artists?</h5>
+          <p>Type in the username of your favourite artist in the <span>search bar</span> on the bottom.You will even be able to save them to your directory once you land on their collection page!</p>
       </Modal>
     </>
   )

@@ -192,7 +192,8 @@ export default function UpdateProfile({ profile, error, setProfile, setError }) 
         </div>
       </div>
       {/* Card Back */}
-      <div style={styles.card}>
+      <div className='profile-form' style={styles.card}>
+        <h1>Update Profile</h1>
         <CustomForm
           request={handleProfileUpdate}
           fields={fields}

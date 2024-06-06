@@ -54,7 +54,7 @@ export default function CreateArtwork({ userId }) {
           className='create-artwork-btn'
           onClick={() => setFlipCreateArtworkCard(!flipCreateArtworkCard)
           }>
-          Create Artwork
+          +
         </button>
       </div>
       {/* Card Back */}

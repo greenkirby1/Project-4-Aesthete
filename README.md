@@ -1,1 +1,4 @@
 # Project-4-Aesthete
+Have you ever wondered what it was like to have your artwork displayed in a fancy baroque art frame hung inside an even fancier art gallery? Well I have, and I built a virtual gallery that has a pixel game look for artists and art enjoyers to gather.
+
+<!-- My initial thought process was that I wanted to make an art portfolio page for personal use, because why am I spending huge amounts to host my website on a service that shall not be named. And why would I post my copyrighted artwork to a social media app that also shall not be named, just for them to steal and feed it to an AI to generate income for others. Both of these services don't even look that good either. -->

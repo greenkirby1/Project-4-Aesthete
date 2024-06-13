@@ -27,7 +27,7 @@ Have you ever wondered what it was like to have your artwork displayed in a fanc
 This was my final project with General Assembley, during the Software Engineering Immersive Course. It was a solo full-stack project that was completed in 8 days.
 
 <p align='center'>
-  <img class='home-page-sc' width='600' height='295' src='https://res.cloudinary.com/dv4ymisss/image/upload/v1718273197/ReadMe/Aesthete_Homepage_fvgs7f.png'>
+  <img class='home-page-sc' src='https://res.cloudinary.com/dv4ymisss/image/upload/v1718273197/ReadMe/Aesthete_Homepage_fvgs7f.png'>
 </p>
 
 ## Deployment Link

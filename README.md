@@ -8,17 +8,20 @@
     font-family: 'FT88 School';
     src: url('./client/src/assets/FT88-School.otf');
   }
-  /* .home-page-sc {
+
+  .home-page-sc {
     border-radius: 10px;
     box-shadow: 0px 15px 15px grey;
     margin: 2em;
-  } */
-  /* .font-bold {
+  }
+
+  .font-bold {
     font-family: 'FT88 Bold'
   }
+
   .font-school {
     font-family: 'FT88 School'
-  } */
+  }
 </style>
 
 # Aesthete - For Art Enjoyers and Artists Alike
@@ -27,7 +30,7 @@ Have you ever wondered what it was like to have your artwork displayed in a fanc
 This was my final project with General Assembley, during the Software Engineering Immersive Course. It was a solo full-stack project that was completed in 8 days.
 
 <p align='center'>
-  <img class='home-page-sc' style='border-radius: 10px; box-shadow: 0px 15px 15px grey; margin: 2em;' src='https://res.cloudinary.com/dv4ymisss/image/upload/v1718273197/ReadMe/Aesthete_Homepage_fvgs7f.png'>
+  <img class='home-page-sc' src='https://res.cloudinary.com/dv4ymisss/image/upload/v1718273197/ReadMe/Aesthete_Homepage_fvgs7f.png'>
 </p>
 
 ## Deployment Link
@@ -63,8 +66,8 @@ npm run dev <!-- Run command after ALL packages are installed -->
 * React
 * SCSS/SASS
 * [Degheest Font Collection](https://velvetyne.fr/fonts/degheest/) from Velvetyne
-  * <span class='font-bold' style='font-family: FT88 Bold;'>FT88-Bold</span>
-  * <span class='font-school' style='font-family: FT88 School'>FT88-School</span>
+  * <span class='font-bold'>FT88-Bold</span>
+  * <span class='font-school'>FT88-School</span>
 * Downloads/Packages
   * [Axios](https://www.npmjs.com/package/axios)
   * [Bootstrap](https://www.npmjs.com/package/bootstrap)
@@ -102,3 +105,5 @@ npm run dev <!-- Run command after ALL packages are installed -->
 </p>
 
 ## Build/Code Process
+### Overview
+Initially this site was intended for my personal use; to display my artworks in an interersting and fun manner. As I brainsormed further I thought it would be even more interesting if other artists could also display their artworks, simulating a traditional gallery with an amalgamation of unique works. There are 2 different types of accounts, <strong>artists</strong> and <strong>visitors</strong>. The difference between both is that artists can create new artworks or delete them. 

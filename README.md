@@ -126,6 +126,7 @@ Both pages feature a reuseable **form component** that handles different input f
 </p>
 
 Once you complete the **sign up** or **log in** form, you will automiatically be logged in. In order to log in the user that was just created, this code was implemented in `users/serializers/common.py`:
+
 ```py
 class RegisterSerializer(serializers.ModelSerializer):
 
@@ -162,9 +163,48 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     return user_data
 ```
+
 In this code the create method in **Django REST framework** is overriden, when a new user is created, the validated user data is utilised to generate a new access token that is returned in the request response along with the new user data. This makes the access token accessible in the front-end for subsequent **POST/PUT/PATCH/DELETE** requests made by authorized user.
 
 ### Gallery Page
-The gallery comprise of an array of **artworks** and their **information**, retrieved using a **GET** request that is called when first rendered. The page itself moves in the unconventional horizontal axis, while still mainting the conventional vertical scrolling.
+The gallery comprise of an array of **artworks** and their **information**, retrieved using a **GET** request that is called when first rendered. The page itself moves in the unconventional horizontal axis, while using the conventional vertical scrolling. 
 
-![gallery scroll](https://res.cloudinary.com/dv4ymisss/video/upload/v1718362833/ReadMe/scroll_abkzaj.mp4)
+At the top of the page there are 2 buttons: **'My Collections'** and **'Exit Gallery'**; which navigates the user to **My Collections Page** and logs the user out consecutively. At the bottom of the page there is a **'Help'** button, when clicked a modal pops up to provide instructions for the site. A **search bar** is also available for the user to type in the artist name, once submitted the user will navigate to the specified **Artist Collection Page**.
+
+To the right of each painting, there is an **'Info'** button which causes a modal to pop up showing the information of the painting next to it. It also displays all the comments left by different users, and the option to post a comment.
+
+<p align='center'>
+  <img src='https://res.cloudinary.com/dv4ymisss/image/upload/v1718362782/ReadMe/gallery-scroll_fckgfj.gif'>
+</p>
+
+The horizontal scroll was one of the hardest feature in the project as the default vertical scroll is favoured, the **GSAP** package was used to aid the implementation. The code itself was not lengthy at all:
+
+```js
+useGSAP(() => {
+    if (artworks) {
+      let sections = gsap.utils.toArray('.section')
+
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: document.querySelector('.painting-wrapper'),
+          pin: true,
+          scrub: 1,
+          end: () => '+=' + document.querySelector('.painting-wrapper').offsetWidth * 10
+        }
+      })
+
+      ScrollTrigger.addEventListener('scrollEnd', () => {
+        setSpriteMove('stand')
+      })
+    }
+  }, { scope: gallery })
+```
+
+The `useGSAP()` hook that comes with **GSAP** is a custom hook that consists of a `useEffect()` hook. During the initial render, a pin is created using `ScrollTrigger` that locks the wrapper `div` in place, and as the user scrolls the defined `sections` will animate through applied inline CSS.
+
+It was difficult to implement due to the fact that I was limited by my own understanding of the wide range of features available in the package, as well as the complexity of React in regards to module/component scope. At first the code was executed in `Gallery.jsx`, however it did not run as expected which was likely due to the HTML structure and scope. With the time limitation of the project, the only solution I came to was to create a subcompoenent that emcompasses the `.painting-wrapper div` and the **GSAP** code.
+
+### My Collections Page
+Every user has their own collections page, artist accounts have a button to create a new artwork. 

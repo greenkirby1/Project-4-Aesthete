@@ -167,4 +167,4 @@ In this code the create method in **Django REST framework** is overriden, when a
 ### Gallery Page
 The gallery comprise of an array of **artworks** and their **information**, retrieved using a **GET** request that is called when first rendered. The page itself moves in the unconventional horizontal axis, while still mainting the conventional vertical scrolling.
 
-![horizontal scroll](https://res.cloudinary.com/dv4ymisss/video/upload/v1718359685/ReadMe/gallery-scroll_lynmfi.mp4)
+![gallery scroll](https://res.cloudinary.com/dv4ymisss/video/upload/v1718362833/ReadMe/scroll_abkzaj.mp4)
